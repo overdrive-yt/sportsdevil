@@ -270,7 +270,9 @@ export class IntegrationTestingFramework {
       const config = {
         clientId: 'test_client',
         clientSecret: 'test_secret',
-        redirectUri: 'http://localhost:3001/auth/ebay',
+        redirectUri: `${process.env.NODE_ENV === 'production' 
+          ? 'https://www.sportsdevil.co.uk'
+          : process.env.NEXTAUTH_URL || 'http://localhost:3001'}/auth/ebay`,
         devId: 'test_dev',
         environment: 'sandbox' as const
       }
@@ -289,7 +291,9 @@ export class IntegrationTestingFramework {
       const config = {
         clientId: 'test_client',
         clientSecret: 'test_secret',
-        redirectUri: 'http://localhost:3001/auth/ebay',
+        redirectUri: `${process.env.NODE_ENV === 'production' 
+          ? 'https://www.sportsdevil.co.uk'
+          : process.env.NEXTAUTH_URL || 'http://localhost:3001'}/auth/ebay`,
         devId: 'test_dev',
         environment: 'sandbox' as const,
         accessToken: 'mock_token'
@@ -306,7 +310,9 @@ export class IntegrationTestingFramework {
       const config = {
         clientId: 'test_client',
         clientSecret: 'test_secret',
-        redirectUri: 'http://localhost:3001/auth/ebay',
+        redirectUri: `${process.env.NODE_ENV === 'production' 
+          ? 'https://www.sportsdevil.co.uk'
+          : process.env.NEXTAUTH_URL || 'http://localhost:3001'}/auth/ebay`,
         devId: 'test_dev',
         environment: 'sandbox' as const,
         accessToken: 'mock_token'
@@ -322,7 +328,9 @@ export class IntegrationTestingFramework {
       const config = {
         clientId: 'test_client',
         clientSecret: 'test_secret',
-        redirectUri: 'http://localhost:3001/auth/ebay',
+        redirectUri: `${process.env.NODE_ENV === 'production' 
+          ? 'https://www.sportsdevil.co.uk'
+          : process.env.NEXTAUTH_URL || 'http://localhost:3001'}/auth/ebay`,
         devId: 'test_dev',
         environment: 'sandbox' as const,
         accessToken: 'mock_token'
@@ -338,7 +346,9 @@ export class IntegrationTestingFramework {
       const config = {
         clientId: 'test_client',
         clientSecret: 'test_secret',
-        redirectUri: 'http://localhost:3001/auth/ebay',
+        redirectUri: `${process.env.NODE_ENV === 'production' 
+          ? 'https://www.sportsdevil.co.uk'
+          : process.env.NEXTAUTH_URL || 'http://localhost:3001'}/auth/ebay`,
         devId: 'test_dev',
         environment: 'sandbox' as const,
         accessToken: 'mock_token'

@@ -493,7 +493,11 @@ export class TikTokShopIntegration {
     }
 
     // Setup webhooks
-    await this.service.setupWebhooks(process.env.NEXTAUTH_URL || 'http://localhost:3001')
+    await this.service.setupWebhooks(
+      process.env.NODE_ENV === 'production' 
+        ? 'https://www.sportsdevil.co.uk'
+        : process.env.NEXTAUTH_URL || 'http://localhost:3001'
+    )
 
     // Update platform integration status
     await prisma.platformIntegration.update({

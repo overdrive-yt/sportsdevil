@@ -82,8 +82,8 @@ export class EmailService {
     const subject = `Order Confirmation - ${orderNumber} | Sports Devil`
     
     // Generate dynamic tracking URL
-    const baseUrl = process.env.NEXTAUTH_URL_PRODUCTION && process.env.NODE_ENV === 'production' 
-      ? process.env.NEXTAUTH_URL_PRODUCTION 
+    const baseUrl = process.env.NODE_ENV === 'production' 
+      ? 'https://www.sportsdevil.co.uk'
       : process.env.NEXTAUTH_URL || 'http://localhost:3001'
     
     const trackingUrl = `${baseUrl}/dashboard`
@@ -617,7 +617,7 @@ Sports Devil
     </ul>
     
     <center>
-      <a href="${process.env.NEXTAUTH_URL}/dashboard" class="button">Retry Payment</a>
+      <a href="${process.env.NODE_ENV === 'production' ? 'https://www.sportsdevil.co.uk' : process.env.NEXTAUTH_URL}/dashboard" class="button">Retry Payment</a>
     </center>
     
     <p>If you continue to experience issues, please contact us and we'll be happy to help resolve this.</p>
@@ -646,7 +646,7 @@ Your order is currently on hold. To complete your purchase, please:
 - Ensure sufficient funds are available
 - Try completing the payment again
 
-Retry payment: ${process.env.NEXTAUTH_URL}/dashboard
+Retry payment: ${process.env.NODE_ENV === 'production' ? 'https://www.sportsdevil.co.uk' : process.env.NEXTAUTH_URL}/dashboard
 
 If you continue to experience issues, please contact us.
 

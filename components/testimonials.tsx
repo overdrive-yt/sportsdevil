@@ -143,8 +143,8 @@ async function getGoogleReviews(): Promise<{ reviews: Review[], source: string, 
   try {
     // For production, this will be server-side
     const baseUrl = process.env.NODE_ENV === 'production' 
-      ? process.env.NEXTAUTH_URL || 'https://sportsdevil.co.uk'
-      : 'http://localhost:3001'
+      ? 'https://www.sportsdevil.co.uk'
+      : process.env.NEXTAUTH_URL || 'http://localhost:3001'
     
     const response = await fetch(`${baseUrl}/api/google-reviews`, {
       // Enable ISR caching for production

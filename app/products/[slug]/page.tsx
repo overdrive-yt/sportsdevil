@@ -10,9 +10,9 @@ import { apiClient } from '@/lib/api-client'
 // Environment-aware base URL helper
 const getBaseUrl = () => {
   if (process.env.NODE_ENV === 'development') {
-    return 'http://localhost:3001'
+    return process.env.NEXTAUTH_URL || 'http://localhost:3001'
   }
-  return 'https://sportsdevil.co.uk'
+  return 'https://www.sportsdevil.co.uk'
 }
 
 const baseUrl = getBaseUrl()

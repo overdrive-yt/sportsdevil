@@ -9,8 +9,16 @@ export default withAuth(
     if (process.env.NODE_ENV === 'development' && req.nextUrl.protocol === 'https:') {
       const httpUrl = new URL(req.nextUrl)
       httpUrl.protocol = 'http:'
-      httpUrl.port = '3001'
+      httpUrl.port = process.env.PORT || '3001'
       return Response.redirect(httpUrl.toString(), 301)
+    }
+    
+    // FORCE HTTPS IN PRODUCTION - SECURITY
+    if (process.env.NODE_ENV === 'production' && req.nextUrl.protocol === 'http:') {
+      const httpsUrl = new URL(req.nextUrl)
+      httpsUrl.protocol = 'https:'
+      httpsUrl.port = '' // Remove port for production HTTPS
+      return Response.redirect(httpsUrl.toString(), 301)
     }
     
     // Only handle API route protection - NO page redirects

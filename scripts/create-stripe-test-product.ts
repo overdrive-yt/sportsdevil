@@ -45,7 +45,7 @@ async function createStripeTestProduct() {
     console.log(`   📊 Status: ${testProduct.status}`)
     
     console.log('\n🎯 Testing Instructions:')
-    console.log('1. Go to http://localhost:3001/products')
+    console.log(`1. Go to ${process.env.NEXTAUTH_URL || (process.env.NODE_ENV === 'production' ? 'https://www.sportsdevil.co.uk' : 'http://localhost:3001')}/products`)
     console.log('2. Find "STRIPE TEST ITEM - £1 Payment Test"')
     console.log('3. Click "Add to Cart"')
     console.log('4. Go to cart and proceed to checkout')
