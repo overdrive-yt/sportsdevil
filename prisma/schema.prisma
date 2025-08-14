@@ -1,0 +1,1209 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// NextAuth.js required models
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verificationtokens")
+}
+
+// Users & Authentication (Customers Only)
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  phone         String?
+  address       String?
+  city          String?
+  postalCode    String?
+  country       String?
+  loyaltyPoints Int       @default(0)
+  totalSpent    Decimal   @default(0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  accounts     Account[]
+  sessions     Session[]
+  orders       Order[]
+  cartItems    CartItem[]
+  appointments Appointment[]
+  reviews      Review[]
+  loyaltyTransactions LoyaltyTransaction[]
+  couponUsages CouponUsage[]
+  milestoneRewards MilestoneReward[]
+  stripeCustomer StripeCustomer?
+  wishlists    Wishlist[]
+  wishlistItems WishlistItem[]
+  gdprConsents GdprConsent[]
+  gdprRequests GdprRequest[]
+
+  @@map("users")
+}
+
+// Wishlist System
+model Wishlist {
+  id          String   @id @default(cuid())
+  userId      String
+  name        String   @default("My Wishlist")
+  description String?
+  isDefault   Boolean  @default(true)
+  isPublic    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  user  User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items WishlistItem[]
+
+  @@index([userId])
+  @@index([userId, isDefault])
+  @@map("wishlists")
+}
+
+model WishlistItem {
+  id         String   @id @default(cuid())
+  userId     String   // Denormalized for quick user queries
+  wishlistId String
+  productId  String
+  addedAt    DateTime @default(now())
+  notes      String?  // Optional user notes about the item
+  priority   Int      @default(1) // 1=Low, 2=Medium, 3=High
+
+  // Relations
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  wishlist Wishlist @relation(fields: [wishlistId], references: [id], onDelete: Cascade)
+  product  Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([wishlistId, productId])
+  @@index([userId])
+  @@index([productId])
+  @@index([userId, productId])
+  @@map("wishlist_items")
+}
+
+// Admin Users (Separated from Customer Users)
+model Admin {
+  id              String      @id @default(cuid())
+  name            String
+  email           String      @unique
+  emailVerified   DateTime?
+  image           String?
+  password        String
+  level           AdminLevel  @default(ADMIN)
+  phone           String?
+  department      String?     // e.g., "Operations", "Marketing", "IT"
+  permissions     String?     // JSON: Granular permissions array
+  isActive        Boolean     @default(true)
+  lastLoginAt     DateTime?
+  loginCount      Int         @default(0)
+  
+  // Admin Profile
+  title           String?     // e.g., "Store Manager", "Cricket Expert"
+  bio             String?     // Admin description
+  emergencyContact String?    // Emergency contact info
+  
+  // Audit Fields
+  createdBy       String?     // Admin who created this admin
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  
+  // Admin-specific relations
+  adminAccounts   AdminAccount[]
+  adminSessions   AdminSession[]
+  
+  // Future admin-specific features
+  adminLogs       AdminLog[]
+  
+  @@index([email])
+  @@index([level, isActive])
+  @@map("admins")
+}
+
+// Admin-specific Account model (for OAuth if needed)
+model AdminAccount {
+  id                String  @id @default(cuid())
+  adminId           String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  admin Admin @relation(fields: [adminId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("admin_accounts")
+}
+
+// Admin-specific Session model
+model AdminSession {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  adminId      String
+  expires      DateTime
+  ipAddress    String?  // Track admin login locations
+  userAgent    String?  // Track admin devices
+  
+  admin        Admin    @relation(fields: [adminId], references: [id], onDelete: Cascade)
+
+  @@map("admin_sessions")
+}
+
+// Admin Activity Log model
+model AdminLog {
+  id          String    @id @default(cuid())
+  adminId     String
+  action      String    // "LOGIN", "CREATE_PRODUCT", "UPDATE_ORDER", etc.
+  resource    String?   // Resource affected (product ID, order ID, etc.)
+  details     String?   // JSON: Additional action details
+  ipAddress   String?
+  userAgent   String?
+  createdAt   DateTime  @default(now())
+  
+  admin       Admin     @relation(fields: [adminId], references: [id], onDelete: Cascade)
+  
+  @@index([adminId, createdAt])
+  @@index([action, createdAt])
+  @@map("admin_logs")
+}
+
+// Product Catalog System
+model Category {
+  id                String            @id @default(cuid())
+  name              String
+  slug              String            @unique
+  description       String?
+  image             String?
+  parentId          String?
+  isActive          Boolean           @default(true)
+  sortOrder         Int               @default(0)
+  attributeTemplate String?           // JSON template for this category's attributes
+  ageCategory       AgeCategory?      // New: Age classification (MENS, JUNIOR, UNISEX)
+  level             Int               @default(0) // New: 0=Sport, 1=Age, 2=Equipment Type, 3=Sub-category
+  fullPath          String?           // New: "Cricket > Mens > Wicket Keeping"
+  parent            Category?         @relation("CategoryHierarchy", fields: [parentId], references: [id])
+  children          Category[]        @relation("CategoryHierarchy")
+  productCategories ProductCategory[]
+  attributes        Attribute[]
+  productTemplates  ProductTemplate[] // V9.11.3
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  @@index([parentId])
+  @@index([slug])
+  @@index([isActive])
+  @@index([ageCategory])
+  @@index([level])
+  @@map("categories")
+}
+
+model Product {
+  id               String              @id @default(cuid())
+  name             String
+  slug             String              @unique
+  description      String?
+  shortDescription String?
+  price            Decimal
+  originalPrice    Decimal?
+  sku              String              @unique
+  stockQuantity    Int                 @default(0)
+  isActive         Boolean             @default(true)
+  isFeatured       Boolean             @default(false)
+  isNew            Boolean             @default(false)
+  weight           Decimal?
+  dimensions       String?
+  colors           String?             // JSON string for SQLite compatibility
+  sizes            String?             // JSON string for SQLite compatibility  
+  tags             String?             // JSON string for SQLite compatibility
+  metaTitle        String?
+  metaDescription  String?
+  
+  // V9.11.3 Revolutionary Product Forms fields
+  status           ProductStatus       @default(DRAFT)
+  categoryAttributes String?            // JSON: Dynamic attributes based on category
+  seoKeywords      String?             // JSON array for SEO
+  template         String?             // Reusable product template reference
+  
+  // Analytics
+  impressions      Int                 @default(0)
+  clicks           Int                 @default(0)
+  conversionRate   Decimal?
+  
+  images           ProductImage[]
+  productCategories ProductCategory[]
+  productAttributes ProductAttribute[]
+  cartItems        CartItem[]
+  orderItems       OrderItem[]
+  reviews          Review[]
+  productMappings  ProductMapping[]    // V9.11.5 Integration relations
+  wishlistItems    WishlistItem[]      // Wishlist system relation
+  createdAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
+
+  @@index([isActive, isFeatured])
+  @@index([slug])
+  @@index([sku])
+  @@index([status])
+  @@map("products")
+}
+
+model ProductImage {
+  id        String  @id @default(cuid())
+  url       String
+  alt       String?
+  caption   String?
+  isPrimary Boolean @default(false)
+  sortOrder Int     @default(0)
+  
+  // V9.11.3 Image metadata
+  width     Int?
+  height    Int?
+  size      Int?    // File size in bytes
+  format    String? // jpg, png, webp
+  
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([productId])
+  @@map("product_images")
+}
+
+// Multi-Category Junction System
+model ProductCategory {
+  id         String   @id @default(cuid())
+  productId  String
+  categoryId String
+  isPrimary  Boolean  @default(false) // One primary category per product
+  sortOrder  Int      @default(0)
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+  
+  @@unique([productId, categoryId])
+  @@index([productId])
+  @@index([categoryId])
+  @@map("product_categories")
+}
+
+// Cricket-Specific Product Attributes System
+model ProductAttribute {
+  id          String    @id @default(cuid())
+  productId   String
+  attributeId String
+  value       String
+  product     Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  attribute   Attribute @relation(fields: [attributeId], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  
+  @@unique([productId, attributeId])
+  @@index([productId])
+  @@index([attributeId])
+  @@map("product_attributes")
+}
+
+// Flexible Attribute Definitions
+model Attribute {
+  id               String             @id @default(cuid())
+  name             String             // "Bat Size", "Grade", "Weight", "Hand"
+  slug             String             @unique
+  type             AttributeType      // SELECT, TEXT, NUMBER, BOOLEAN
+  options          String?            // JSON for SELECT types ["Right Hand", "Left Hand"]
+  isRequired       Boolean            @default(false)
+  sortOrder        Int                @default(0)
+  categoryId       String?
+  category         Category?          @relation(fields: [categoryId], references: [id])
+  productAttributes ProductAttribute[]
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  
+  @@index([categoryId])
+  @@index([slug])
+  @@map("attributes")
+}
+
+// Shopping Cart System
+model CartItem {
+  id        String  @id @default(cuid())
+  quantity  Int
+  color     String?
+  size      String?
+  userId    String
+  productId String
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, productId, color, size])
+  @@index([userId])
+  @@map("cart_items")
+}
+
+// Order Management
+model Order {
+  id              String        @id @default(cuid())
+  orderNumber     String        @unique
+  status          OrderStatus   @default(PENDING)
+  totalAmount     Decimal
+  subtotalAmount  Decimal
+  taxAmount       Decimal
+  shippingAmount  Decimal
+  discountAmount  Decimal?
+  couponCode      String?
+  notes           String?
+
+  // Customer Info
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  // Shipping Address
+  shippingName    String
+  shippingEmail   String
+  shippingPhone   String?
+  shippingAddress String
+  shippingCity    String
+  shippingPostal  String
+  shippingCountry String @default("UK")
+
+  // Billing Address
+  billingName     String
+  billingEmail    String
+  billingPhone    String?
+  billingAddress  String
+  billingCity     String
+  billingPostal   String
+  billingCountry  String @default("UK")
+
+  // Payment Info
+  paymentMethod   String
+  paymentStatus   PaymentStatus @default(PENDING)
+  paymentIntentId String?
+  transactionId   String?
+
+  // Order Items
+  orderItems OrderItem[]
+  loyaltyTransactions LoyaltyTransaction[]
+  couponUsages CouponUsage[]
+  orderMappings OrderMapping[]          // V9.11.5 Integration relations
+  stripePayment StripePayment?          // Stripe payment relation
+
+  // Timestamps
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  shippedAt   DateTime?
+  deliveredAt DateTime?
+
+  @@index([userId])
+  @@index([orderNumber])
+  @@index([status])
+  @@map("orders")
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  quantity  Int
+  price     Decimal
+  color     String?
+  size      String?
+  orderId   String
+  productId String
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id])
+
+  @@index([orderId])
+  @@map("order_items")
+}
+
+// Appointment System
+model Appointment {
+  id          String            @id @default(cuid())
+  date        DateTime
+  time        String
+  status      AppointmentStatus @default(PENDING)
+  notes       String?
+  customerName String
+  customerEmail String
+  customerPhone String?
+  service     String?
+  userId      String?
+  user        User?             @relation(fields: [userId], references: [id])
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  @@index([userId])
+  @@index([date])
+  @@index([status])
+  @@map("appointments")
+}
+
+// Coupon System - Enhanced for V9.11.2
+model Coupon {
+  id          String   @id @default(cuid())
+  code        String   @unique
+  description String?
+  discountType String  // PERCENTAGE, FIXED_AMOUNT, FREE_SHIPPING, BUY_X_GET_Y
+  discountValue Decimal
+  minimumAmount Decimal?
+  maximumDiscount Decimal?
+  usageLimit  Int?
+  usedCount   Int      @default(0)
+  isActive    Boolean  @default(true)
+  validFrom   DateTime
+  validUntil  DateTime
+  
+  // V9.11.2 New fields
+  template        String?    // Template name for reuse
+  campaignId      String?    // Group coupons by campaign
+  targetSegment   String?    // Customer targeting rules (JSON)
+  scheduleStart   DateTime?  // Scheduled activation
+  scheduleEnd     DateTime?  // Scheduled deactivation
+  timeRestrictions String?   // Time-based restrictions (JSON)
+  maxUsesPerUser  Int?       // Per-user usage limit
+  requiresAccount Boolean    @default(true)
+  stackable       Boolean    @default(false)
+  priority        Int        @default(0)
+  buyXQuantity    Int?       // For BUY_X_GET_Y type
+  getYQuantity    Int?       // For BUY_X_GET_Y type
+  applicableProducts String?  // JSON array of product IDs
+  applicableCategories String? // JSON array of category IDs
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  couponUsages CouponUsage[]
+  campaign     Campaign?  @relation(fields: [campaignId], references: [id])
+
+  @@index([code])
+  @@index([isActive])
+  @@index([campaignId])
+  @@map("coupons")
+}
+
+// Review System
+model Review {
+  id               String   @id @default(cuid())
+  productId        String
+  userId           String
+  rating           Int      // 1-5 stars
+  title            String
+  content          String
+  images           String?  // JSON string for review images
+  verifiedPurchase Boolean  @default(false)
+  helpful          Int      @default(0)
+  unhelpful        Int      @default(0)
+  isApproved       Boolean  @default(true)
+  product          Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([productId])
+  @@index([userId])
+  @@index([rating])
+  @@index([isApproved])
+  @@map("reviews")
+}
+
+// Loyalty Points System
+model LoyaltyTransaction {
+  id          String   @id @default(cuid())
+  userId      String
+  orderId     String?
+  type        String   // EARNED, REDEEMED
+  points      Int
+  description String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  order       Order?   @relation(fields: [orderId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId])
+  @@index([orderId])
+  @@index([type])
+  @@map("loyalty_transactions")
+}
+
+// Coupon Usage Tracking (Per-user coupon usage to prevent abuse) - Enhanced for V9.11.2
+model CouponUsage {
+  id        String   @id @default(cuid())
+  userId    String
+  couponId  String
+  orderId   String?
+  usedAt    DateTime @default(now())
+  
+  // V9.11.2 Analytics fields
+  orderTotal      Decimal?
+  discountAmount  Decimal?
+  deviceType      String?   // mobile, desktop, tablet
+  referralSource  String?   // direct, email, social
+  userAgent       String?   // Browser/device info
+  ipCountry       String?   // Geographic data
+  
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  coupon    Coupon   @relation(fields: [couponId], references: [id], onDelete: Cascade)
+  order     Order?   @relation(fields: [orderId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@unique([userId, couponId]) // Ensures one usage per user per coupon
+  @@index([userId])
+  @@index([couponId])
+  @@index([usedAt])
+  @@map("coupon_usage")
+}
+
+// V9.11.2 New Campaign model for grouping coupons
+model Campaign {
+  id          String    @id @default(cuid())
+  name        String
+  description String?
+  slug        String    @unique
+  startDate   DateTime
+  endDate     DateTime
+  isActive    Boolean   @default(true)
+  budget      Decimal?  // Optional campaign budget
+  targetSales Decimal?  // Optional sales target
+  theme       String?   // Campaign theme/type
+  createdBy   String?   // Admin who created it
+  metadata    String?   // JSON for additional data
+  
+  coupons     Coupon[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([slug])
+  @@index([isActive])
+  @@index([startDate, endDate])
+  @@map("campaigns")
+}
+
+// Milestone Rewards Tracking (Prevents duplicate milestone rewards)
+model MilestoneReward {
+  id           String   @id @default(cuid())
+  userId       String
+  milestonePoints Int   // Points threshold reached (500, 1000, 1500, etc.)
+  rewardType   String   // VOUCHER, POINTS_BONUS
+  rewardValue  Decimal  // Value of reward (5.00 for £5 voucher)
+  voucherCode  String?  // Generated voucher code if applicable
+  rewardedAt   DateTime @default(now())
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+
+  @@unique([userId, milestonePoints]) // Ensures one reward per milestone per user
+  @@index([userId])
+  @@index([milestonePoints])
+  @@map("milestone_rewards")
+}
+
+// Enums
+enum Role {
+  CUSTOMER
+}
+
+enum AgeCategory {
+  MENS
+  JUNIOR
+  UNISEX
+}
+
+enum AdminLevel {
+  ADMIN
+  SUPER_ADMIN
+  OWNER
+}
+
+// GDPR Compliance Models
+model GdprConsent {
+  id           String   @id @default(cuid())
+  userId       String?  // Optional - for anonymous users
+  sessionId    String   @unique // Browser session ID
+  essential    Boolean  @default(true)  // Always true
+  performance  Boolean  @default(false)
+  functional   Boolean  @default(false)
+  marketing    Boolean  @default(false)
+  analytics    Boolean  @default(false)
+  consentDate  DateTime @default(now())
+  lastUpdated  DateTime @updatedAt
+  ipAddress    String
+  userAgent    String
+  version      String   // Consent banner version
+  
+  user         User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("gdpr_consent")
+}
+
+model GdprRequest {
+  id            String              @id @default(cuid())
+  userId        String
+  requestType   GdprRequestType
+  status        GdprRequestStatus   @default(PENDING)
+  requestDate   DateTime            @default(now())
+  processedDate DateTime?
+  processedBy   String?
+  reason        String?
+  details       String?             // JSON string for additional data
+  
+  user          User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([userId, requestType])
+  @@map("gdpr_requests")
+}
+
+enum GdprRequestType {
+  ACCESS
+  RECTIFICATION
+  ERASURE
+  RESTRICT_PROCESSING
+  DATA_PORTABILITY
+  OBJECT
+  AUTOMATED_DECISION
+  WITHDRAW_CONSENT
+}
+
+enum GdprRequestStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  REJECTED
+  PARTIALLY_COMPLETED
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  CANCELLED
+  REFUNDED
+}
+
+enum AppointmentStatus {
+  PENDING
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+}
+
+enum AttributeType {
+  TEXT
+  NUMBER
+  SELECT
+  BOOLEAN
+  MULTISELECT
+}
+
+// V9.11.3 Product Status enum
+enum ProductStatus {
+  DRAFT
+  ACTIVE
+  INACTIVE
+  OUT_OF_STOCK
+}
+
+// V9.11.3 Product Template model
+model ProductTemplate {
+  id              String          @id @default(cuid())
+  name            String
+  categoryId      String
+  category        Category        @relation(fields: [categoryId], references: [id])
+  attributes      String          // JSON: Template attributes
+  description     String?
+  seoDefaults     String?         // JSON: Default SEO settings
+  isActive        Boolean         @default(true)
+  usageCount      Int             @default(0)
+  
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  
+  @@index([categoryId])
+  @@index([isActive])
+  @@map("product_templates")
+}
+
+// V9.11.4 Analytics Event Model
+model AnalyticsEvent {
+  id              String          @id @default(cuid())
+  eventType       String          // pageview, click, purchase, etc.
+  eventData       String?         // JSON: Event-specific data
+  sessionId       String
+  userId          String?
+  
+  // Context
+  userAgent       String?
+  ipAddress       String?
+  referrer        String?
+  device          String?         // mobile, desktop, tablet
+  browser         String?
+  os              String?
+  screenResolution String?
+  
+  // Location
+  country         String?
+  city            String?
+  region          String?
+  
+  // Timing
+  timestamp       DateTime        @default(now())
+  pageLoadTime    Int?           // milliseconds
+  
+  @@index([eventType, timestamp])
+  @@index([sessionId])
+  @@index([userId])
+  @@map("analytics_events")
+}
+
+// V9.11.4 Analytics Session Model
+model AnalyticsSession {
+  id              String          @id @default(cuid())
+  sessionId       String          @unique
+  userId          String?
+  startTime       DateTime        @default(now())
+  endTime         DateTime?
+  duration        Int?            // seconds
+  pageViews       Int             @default(0)
+  events          Int             @default(0)
+  
+  // Session data
+  entryPage       String?
+  exitPage        String?
+  referrer        String?
+  utmSource       String?
+  utmMedium       String?
+  utmCampaign     String?
+  
+  @@index([userId])
+  @@index([startTime])
+  @@map("analytics_sessions")
+}
+
+// V9.11.4 Metrics Snapshot Model
+model MetricsSnapshot {
+  id              String          @id @default(cuid())
+  period          String          // hour, day, week, month
+  timestamp       DateTime
+  
+  // Sales metrics
+  revenue         Decimal
+  orders          Int
+  avgOrderValue   Decimal
+  conversionRate  Decimal
+  
+  // Traffic metrics
+  visitors        Int
+  sessions        Int
+  pageViews       Int
+  bounceRate      Decimal
+  avgSessionTime  Int            // seconds
+  
+  // Product metrics
+  productsViewed  Int
+  productsAdded   Int
+  cartAbandoned   Int
+  
+  createdAt       DateTime        @default(now())
+  
+  @@unique([period, timestamp])
+  @@index([period, timestamp])
+  @@map("metrics_snapshots")
+}
+
+// V9.11.5 External Platform Integration Models
+
+// Platform Integration Configuration
+model PlatformIntegration {
+  id              String          @id @default(cuid())
+  platform        Platform        // TIKTOK_SHOP, XEPOS, EBAY
+  name            String          // Display name for admin
+  isActive        Boolean         @default(true)
+  apiEndpoint     String?
+  credentials     String          // JSON: Encrypted API keys and secrets
+  lastSync        DateTime?
+  syncStatus      SyncStatus      @default(PENDING)
+  errorCount      Int             @default(0)
+  lastError       String?
+  config          String?         // JSON: Platform-specific settings
+  
+  // Sync settings
+  autoSync        Boolean         @default(true)
+  syncInterval    Int             @default(3600) // seconds
+  syncProducts    Boolean         @default(true)
+  syncInventory   Boolean         @default(true)
+  syncOrders      Boolean         @default(true)
+  syncPrices      Boolean         @default(true)
+  
+  // Statistics
+  totalProductsSynced   Int       @default(0)
+  totalOrdersSynced     Int       @default(0)
+  lastSuccessfulSync    DateTime?
+  averageSyncTime       Int?      // milliseconds
+  
+  // Relationships
+  productMappings ProductMapping[]
+  orderMappings   OrderMapping[]
+  syncLogs        SyncLog[]
+  
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  
+  @@index([platform, isActive])
+  @@index([syncStatus])
+  @@map("platform_integrations")
+}
+
+// Product Mapping Between Platforms
+model ProductMapping {
+  id              String              @id @default(cuid())
+  productId       String              // Local product ID
+  platformId      String              // Platform integration ID
+  externalId      String              // Platform-specific product ID
+  externalSku     String?             // Platform SKU
+  externalUrl     String?             // Platform product URL
+  status          MappingStatus       @default(ACTIVE)
+  lastSync        DateTime?
+  syncDirection   SyncDirection       @default(BIDIRECTIONAL)
+  conflictData    String?             // JSON: Data conflicts to resolve
+  
+  // Platform-specific data
+  platformData    String?             // JSON: Platform-specific product data
+  customFields    String?             // JSON: Custom field mappings
+  
+  // Sync tracking
+  localLastModified     DateTime?
+  platformLastModified  DateTime?
+  syncAttempts         Int            @default(0)
+  lastSyncAttempt      DateTime?
+  
+  product         Product             @relation(fields: [productId], references: [id], onDelete: Cascade)
+  platform        PlatformIntegration @relation(fields: [platformId], references: [id], onDelete: Cascade)
+  
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+  
+  @@unique([productId, platformId])
+  @@index([externalId, platformId])
+  @@index([status])
+  @@map("product_mappings")
+}
+
+// Order Mapping Between Platforms
+model OrderMapping {
+  id              String              @id @default(cuid())
+  orderId         String              // Local order ID
+  platformId      String              // Platform integration ID
+  externalId      String              // Platform-specific order ID
+  externalNumber  String?             // Platform order number
+  status          OrderMappingStatus  @default(PENDING)
+  lastSync        DateTime?
+  metadata        String?             // JSON: Platform-specific order data
+  
+  // Fulfillment tracking
+  trackingNumber  String?
+  shippingCarrier String?
+  platformStatus  String?             // Platform's order status
+  
+  // Financial reconciliation
+  platformTotal   Decimal?
+  platformFees    Decimal?
+  platformPayout  Decimal?
+  feeBreakdown    String?             // JSON: Detailed fee structure
+  
+  order           Order               @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  platform        PlatformIntegration @relation(fields: [platformId], references: [id], onDelete: Cascade)
+  
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+  
+  @@unique([orderId, platformId])
+  @@index([externalId, platformId])
+  @@index([status])
+  @@map("order_mappings")
+}
+
+// Sync Activity Logging
+model SyncLog {
+  id              String              @id @default(cuid())
+  platformId      String
+  operation       SyncOperation       // PRODUCT_SYNC, ORDER_SYNC, INVENTORY_SYNC
+  direction       SyncDirection       // TO_PLATFORM, FROM_PLATFORM, BIDIRECTIONAL
+  status          SyncStatus          // SUCCESS, FAILED, PENDING
+  recordsProcessed Int                @default(0)
+  recordsFailed   Int                 @default(0)
+  recordsSkipped  Int                 @default(0)
+  errorMessage    String?
+  errorDetails    String?             // JSON: Detailed error information
+  duration        Int?                // milliseconds
+  metadata        String?             // JSON: Additional sync data
+  
+  // Performance metrics
+  startTime       DateTime?
+  endTime         DateTime?
+  memoryUsage     Int?                // MB
+  apiCallCount    Int?
+  
+  platform        PlatformIntegration @relation(fields: [platformId], references: [id], onDelete: Cascade)
+  
+  createdAt       DateTime            @default(now())
+  
+  @@index([platformId, createdAt])
+  @@index([operation, status])
+  @@index([status, createdAt])
+  @@map("sync_logs")
+}
+
+
+// V9.11.5 Integration Enums
+
+enum Platform {
+  TIKTOK_SHOP
+  XEPOS
+  EBAY
+  AMAZON
+  FACEBOOK_SHOP
+  GOOGLE_SHOPPING
+}
+
+enum SyncStatus {
+  PENDING
+  IN_PROGRESS
+  SUCCESS
+  FAILED
+  PAUSED
+  CANCELLED
+  PARTIAL_SUCCESS
+}
+
+enum MappingStatus {
+  ACTIVE
+  INACTIVE
+  CONFLICT
+  PENDING
+  FAILED
+  SYNCING
+}
+
+enum SyncDirection {
+  TO_PLATFORM      // Push to external platform
+  FROM_PLATFORM    // Pull from external platform
+  BIDIRECTIONAL    // Sync both ways
+}
+
+enum OrderMappingStatus {
+  PENDING
+  SYNCED
+  FAILED
+  CANCELLED
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  REFUNDED
+}
+
+enum SyncOperation {
+  PRODUCT_SYNC
+  ORDER_SYNC
+  INVENTORY_SYNC
+  PRICE_SYNC
+  STATUS_SYNC
+  CATEGORY_SYNC
+  CUSTOMER_SYNC
+  FULL_SYNC
+}
+
+// V9.15 System Settings Model
+model SystemSettings {
+  id              String          @id @default(cuid())
+  settings        String          // JSON: Complete settings object
+  version         String          @default("1.0.0")
+  updatedBy       String          // User ID who updated settings
+  
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  
+  @@index([updatedAt])
+  @@map("system_settings")
+}
+
+// V9.15 Audit Log Model  
+model AuditLog {
+  id              String          @id @default(cuid())
+  action          String          // Action type (SETTINGS_UPDATE, USER_CREATE, etc.)
+  userId          String          // User who performed the action
+  entityType      String?         // Type of entity affected
+  entityId        String?         // ID of entity affected
+  details         String?         // JSON: Additional details
+  ipAddress       String?
+  userAgent       String?
+  
+  createdAt       DateTime        @default(now())
+  
+  @@index([userId, createdAt])
+  @@index([action, createdAt])
+  @@map("audit_logs")
+}
+
+// Stripe Integration Models
+model StripeCustomer {
+  id                String          @id @default(cuid())
+  userId            String          @unique
+  stripeCustomerId  String          @unique
+  email             String
+  name              String?
+  
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  
+  user              User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  payments          StripePayment[]
+  
+  @@index([stripeCustomerId])
+  @@index([email])
+  @@map("stripe_customers")
+}
+
+model StripePayment {
+  id                    String                @id @default(cuid())
+  stripePaymentIntentId String                @unique
+  stripeCustomerId      String?
+  orderId               String?               @unique
+  
+  // Payment details
+  amount                Decimal
+  currency              String                @default("gbp")
+  status                StripePaymentStatus
+  paymentMethod         String?               // card, bank_transfer, etc.
+  
+  // Customer info
+  customerEmail         String
+  customerName          String?
+  billingAddress        String?               // JSON
+  shippingAddress       String?               // JSON
+  
+  // Metadata
+  metadata              String?               // JSON for additional data
+  description           String?
+  receiptUrl            String?
+  
+  // Stripe webhook data
+  stripeEventId         String?
+  stripeChargeId        String?
+  
+  createdAt             DateTime              @default(now())
+  updatedAt             DateTime              @updatedAt
+  
+  // Relations
+  stripeCustomer        StripeCustomer?       @relation(fields: [stripeCustomerId], references: [stripeCustomerId])
+  order                 Order?                @relation(fields: [orderId], references: [id])
+  refunds               StripeRefund[]
+  
+  @@index([stripePaymentIntentId])
+  @@index([stripeCustomerId])
+  @@index([status])
+  @@index([createdAt])
+  @@index([customerEmail])
+  @@map("stripe_payments")
+}
+
+model StripeRefund {
+  id                String          @id @default(cuid())
+  stripeRefundId    String          @unique
+  stripePaymentId   String
+  
+  amount            Decimal
+  currency          String          @default("gbp")
+  status            String          // succeeded, pending, failed, cancelled
+  reason            String?         // duplicate, fraudulent, requested_by_customer
+  
+  metadata          String?         // JSON
+  receiptNumber     String?
+  
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  
+  payment           StripePayment   @relation(fields: [stripePaymentId], references: [id], onDelete: Cascade)
+  
+  @@index([stripeRefundId])
+  @@index([stripePaymentId])
+  @@index([createdAt])
+  @@map("stripe_refunds")
+}
+
+// Enhanced Order model relation
+// Note: Add this relation to existing Order model
+// order                 StripePayment?
+
+enum StripePaymentStatus {
+  REQUIRES_PAYMENT_METHOD
+  REQUIRES_CONFIRMATION
+  REQUIRES_ACTION
+  PROCESSING
+  REQUIRES_CAPTURE
+  CANCELLED
+  SUCCEEDED
+  FAILED
+}

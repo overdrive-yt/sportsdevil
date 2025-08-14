@@ -1,0 +1,61 @@
+{
+  "reviews": [
+    {
+      "id": 1,
+      "name": "joshua price",
+      "role": "Birmingham Resident • Cricket Player • 84 reviews",
+      "rating": 5,
+      "verified": true,
+      "businessName": "Sports Devil Cricket Store",
+      "timeAgo": "3 weeks ago",
+      "text": "Customer service was outstanding, great selection of bats and other great products. Will be visiting again soon.",
+      "helpful": 13
+    },
+    {
+      "id": 2,
+      "name": "Amit Kohli",
+      "role": "Local Guide • Equipment Specialist • 82 reviews",
+      "rating": 5,
+      "verified": true,
+      "businessName": "Sports Devil Cricket Store",
+      "timeAgo": "1 months ago",
+      "text": "We bought an MRF bat for my 14 year old son and our experience with Sports Devil was superb! Jay is very knowledgable about all the equipment and ensures that the product is tailored to the players requirements. Quality and service guaranteed!",
+      "helpful": 9
+    },
+    {
+      "id": 3,
+      "name": "Sehrish Shaikh",
+      "role": "Local Guide • Cricket Enthusiast • 43 reviews",
+      "rating": 5,
+      "verified": true,
+      "businessName": "Sports Devil Cricket Store",
+      "timeAgo": "2 months ago",
+      "text": "Bought all the products the full kit. Highly recommended. Lovely bats and lots of knowledge",
+      "helpful": 15
+    },
+    {
+      "id": 4,
+      "name": "Ashwin Anbu",
+      "role": "Local Guide • Sports Equipment Expert • 71 reviews",
+      "rating": 5,
+      "verified": true,
+      "businessName": "Sports Devil Cricket Store",
+      "timeAgo": "4 months ago",
+      "text": "Ordered DSC scud lite steel helmet from them. The delivery was very fast. Great service by the seller. There was and extra sweat band thrown in too. Will totally recommend.",
+      "helpful": 8
+    },
+    {
+      "id": 5,
+      "name": "Sandeep John",
+      "role": "Birmingham Local • Cricket Parent • 62 reviews",
+      "rating": 5,
+      "verified": true,
+      "businessName": "Sports Devil Cricket Store",
+      "timeAgo": "1 years ago",
+      "text": "Best place to buy cricket stuff in Birmingham. Got a bat ( knocked and ready to play) along with leather ball. Jay has got in depth knowledge about cricket equipment and helps in choosing the right gear for the individual. The store has lots of variety in cricket equipment covering all the major brands.",
+      "helpful": 24
+    }
+  ],
+  "timestamp": 1755173943289,
+  "source": "api"
+}

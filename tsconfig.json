@@ -1,0 +1,53 @@
+{
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "es2022"],
+    "allowJs": true,
+    "target": "ES2022", // Modern target for faster compilation
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "jsxImportSource": "react",
+    "incremental": true,
+    // Compilation optimizations for better stability
+    // Better type checking performance
+    "skipDefaultLibCheck": true,
+    // Optimize module resolution
+    "moduleDetection": "force",
+    // Enable faster imports
+    "verbatimModuleSyntax": false,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts", 
+    "**/*.ts", 
+    "**/*.tsx", 
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next",
+    "out",
+    "build",
+    "dist",
+    // Exclude backup files to speed up compilation
+    "**/*.bak",
+    "**/*.backup",
+    // Exclude version control directories
+    "Version Control/**/*",
+    // Exclude temporary files
+    "temp-migration/**/*"
+  ]
+}

@@ -1,0 +1,210 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Next.js build outputs
+.next/
+out/
+build/
+dist/
+
+# Environment variables and secrets - CRITICAL SECURITY
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+.env.backup
+.env.orig
+.env.save
+
+# Database files - SENSITIVE DATA
+*.db
+*.sqlite
+*.sqlite3
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+/lib/generated/prisma
+prisma/dev.db*
+prisma/*.db*
+database.db
+db.sqlite*
+
+# API Keys and Secrets - CRITICAL SECURITY
+**/secrets.json
+**/config/secrets*
+**/keys/*
+api-keys.json
+stripe-keys.json
+webhook-secrets.json
+service-account*.json
+firebase-adminsdk*.json
+google-service-account*.json
+
+# SSL/TLS Certificates and Private Keys - CRITICAL SECURITY  
+*.pem
+*.key
+*.crt
+*.cer
+*.p7b
+*.p7c
+*.p12
+*.pfx
+*.jks
+*.keystore
+ssl/*
+certs/*
+private/*
+
+# OAuth and Authentication Secrets - CRITICAL SECURITY
+**/oauth-secrets*
+**/auth-config.private*
+nextauth-secret*
+session-secret*
+jwt-secret*
+
+# Payment Gateway Secrets - CRITICAL SECURITY
+stripe-*.json
+paypal-*.json
+payment-secrets*
+merchant-keys*
+
+# Third-party Service Keys - CRITICAL SECURITY
+sendgrid-*.json
+mailgun-*.json
+twilio-*.json
+aws-credentials*
+gcp-credentials*
+azure-credentials*
+
+# Backup files - MAY CONTAIN SENSITIVE DATA
+*.backup
+*.bak
+*.tmp
+*.orig
+*.save
+backups/
+dumps/
+exports/
+comprehensive-backup-*.json
+
+# Logs - MAY CONTAIN SENSITIVE DATA
+logs/
+*.log
+*.log.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+error.log
+access.log
+combined.log
+
+# IDE and editor files
+.vscode/settings.json
+.vscode/launch.json
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Testing - MAY CONTAIN SENSITIVE DATA
+coverage/
+.nyc_output/
+junit.xml
+test-results/
+cypress/videos/
+cypress/screenshots/
+playwright-report/
+
+# Cache directories
+.cache/
+.parcel-cache/
+.turbo/
+.swc/
+
+# Vercel
+.vercel
+.vercel.json
+
+# Supabase
+.supabase/
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Temporary folders
+tmp/
+temp/
+.tmp/
+
+# Local development databases
+local.db
+dev.db
+test.db
+development.db
+
+# Session files
+sessions/
+.sessions/
+
+# Upload directories (may contain user data)
+uploads/
+user-uploads/
+public/uploads/temp/
+
+# Private documentation
+PRIVATE_*.md
+INTERNAL_*.md
+CONFIDENTIAL_*.md
+
+# Git security
+.git-credentials
+.gitconfig.local
+
+# Docker secrets
+docker-compose.override.yml
+.dockerignore.local
+
+# Kubernetes secrets
+*-secret.yaml
+*-secrets.yaml
+k8s-secrets/
+
+# Terraform state (contains sensitive data)
+*.tfstate
+*.tfstate.*
+.terraform/
+terraform.tfvars
+
+# Local configuration files
+config.local.*
+settings.local.*
+*.local.json
+*.private.json
+
+# MCP Server configuration (contains access tokens)
+.mcp.json
+
+# Additional sensitive configuration files
+.claude.json
+.vercel.json
