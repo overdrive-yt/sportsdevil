@@ -1,195 +1,189 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code when working with this repository.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Overview
 
-**W3 Sports Devil** - Professional cricket equipment e-commerce website built with Next.js.
+Sports Devil is a Next.js 15 e-commerce platform for cricket equipment and sports gear, using TypeScript, Prisma with PostgreSQL, Stripe for payments, and NextAuth for authentication. The application is deployed on Vercel.
 
-## Tech Stack
-- Next.js 15.4.6, TypeScript, shadcn/ui (40+ components), Tailwind CSS
-- NextAuth.js + Zustand authentication + React Query
-- Prisma ORM database with SQLite/PostgreSQL support
-- Stripe payment integration with webhooks
-- Performance: 2.6s compilation, sub-3s page loads
+## Essential Commands
 
-## Features
-- Shopping cart, 214 products, complete checkout flow
-- Loyalty: 100 points/£1, milestone rewards, unlimited FIRST7
-- Multi-platform: TikTok Shop, Xepos POS, eBay integrations
-- WooCommerce stock sync (64.5% products in stock)
-- Sale pricing with discount badges
-- Email forwarding via Stripe receipts
-- Admin dashboard with RBAC permissions
-- Google Reviews integration
-- WhatsApp support integration
-- Instagram widget integration
-
-## CRITICAL FIXES COMPLETED (August 14, 2025)
-### **v10.2 - Major Rendering & Performance Fixes:**
-
-1. **INFINITE RENDER LOOP FIXES** ✅ RESOLVED:
-   - Fixed ProductsClient infinite React re-renders
-   - Fixed ProductFilters URL update loops with proper debouncing
-   - Stabilized React Query keys with JSON serialization
-   - Fixed server-side infinite API requests (hundreds of GET /products)
-   - Optimized component memoization with useCallback and useMemo
-   - Client-side console logging infinite loops completely eliminated
-
-2. **UI/UX IMPROVEMENTS** ✅ COMPLETED:
-   - Added "Coming Soon" diagonal banners to Tennis, Hockey, More Sports mega menus
-   - Fixed category filter "Clear all" button positioning to prevent overlap
-   - Removed debug text from reviews, Instagram, and categories sections
-   - Fixed home/logo navigation infinite loading issues
-
-3. **SECURITY ENHANCEMENTS** ✅ IMPLEMENTED:
-   - Comprehensive .gitignore with 200+ security patterns
-   - Removed MCP tokens and sensitive data from version control
-   - Protected API keys, certificates, environment variables
-   - Added secure template files (.mcp.json.example)
-   - Excluded database backups and log files from git
-
-## Development Commands
+### Development
 ```bash
-npm run dev              # Development (Port 3001)
-npm run build           # Build
-npm run start           # Start production
-npm run lint            # Linting
-npm run db:reset        # Reset database (preserves business data)
-npm run db:backup       # Create database backup
+# Start development server with Turbo (port 3001)
+npm run dev
+
+# Development server with optimizations and increased memory
+npm run dev:optimized
+
+# Clean Next.js cache and start fresh
+npm run dev:clean
+
+# Complete fresh start (clean all + reinstall)
+npm run dev:fresh
 ```
 
-## Port Configuration
-- **Default Port**: 3001 (Port 3000 causes conflicts)
-- **Access URL**: http://localhost:3001
-
-## Current Status
-- **Version**: V10.2 Complete (Full E-commerce Platform + Performance Optimized)
-- **State**: PRODUCTION-READY with zero TypeScript errors + Zero infinite render loops
-- **Performance**: Ultra-fast compilation, Web Vitals monitoring, optimized React rendering
-- **Database**: Complete backup system with zero loss guarantee (excluded from git for security)
-- **Security**: Enhanced RBAC system + comprehensive .gitignore security patterns
-- **Monitoring**: Comprehensive error tracking and performance metrics
-- **Payments**: Full Stripe integration with customer receipt emails
-- **Testing**: Comprehensive end-to-end checkout flow verified
-- **Git Status**: Clean commit v10.2 with 2,493 files, all sensitive data excluded
-
-## Key Database State
-- 214 Products with real WooCommerce stock quantities
-- 43 Categories with fixed mega menu navigation
-- Unlimited FIRST7 coupon with abuse prevention
-- Complete loyalty system with milestone rewards
-
-## System Status
-✅ **FULLY FUNCTIONAL SYSTEMS (Post v10.2):**
-1. **React Rendering**: ZERO infinite loops - All components optimized with proper memoization
-2. **TypeScript Compilation**: ZERO ERRORS - Production-ready
-3. **Navigation System**: Home/logo clicks work perfectly, no infinite loading
-4. **Cricket Mega Menu Navigation**: All 18 categories working + "Coming Soon" banners for Tennis/Hockey/More Sports
-5. **Product Filtering**: Clear all button properly positioned, no overlap issues
-6. **WooCommerce Stock Sync**: Real inventory quantities (64.5% products in stock)
-7. **Sale Pricing System**: Complete with discount badges
-8. **RBAC Security System**: Role-based access control with granular permissions
-9. **Error Handling & Monitoring**: Sentry integration with performance tracking  
-10. **Database System**: Complete backup with zero loss guarantee
-11. **Authentication**: Secure NextAuth.js with JWT validation
-12. **Performance Monitoring**: Real-time Web Vitals and metrics
-13. **Stripe Payment Gateway**: Full integration with test/live keys
-14. **Customer Receipt Emails**: Automatic Stripe receipt delivery via Stripe
-15. **Order Management**: Complete order creation and confirmation system
-16. **Cart System**: Robust error handling and state management
-17. **API Performance**: Controlled API requests, no more infinite GET /products loops
-18. **Client-side Performance**: Clean console logs, no rendering spam
-19. **Git Security**: All sensitive data excluded, comprehensive .gitignore patterns
-
-
-### Required Environment Variables
+### Build & Deploy
 ```bash
-# Core Application
-NEXTAUTH_SECRET=your_secret_here
-NEXTAUTH_URL=http://localhost:3001
-DATABASE_URL="file:./dev.db"
+# Build for production (includes Prisma generation)
+npm run build
 
-# Stripe Payment Gateway (TEST MODE currently active)
-STRIPE_SECRET_KEY=sk_test_51K9eY9Il9c9ZTqpA[your_test_key]
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_51K9eY9Il9c9ZTqpA[your_test_key]
-STRIPE_WEBHOOK_SECRET=whsec_test_[your_webhook_secret]
+# Type checking
+npm run typecheck
 
-# Optional: Sentry (for error monitoring)
-SENTRY_DSN=your_sentry_dsn_here
+# Linting
+npm run lint
+npm run lint:fix
 
-# Optional: Analytics
-NEXT_PUBLIC_GA_ID=your_ga_id_here
+# Run tests
+npm run test
+npm run test:watch
+npm run test:coverage
 ```
 
-### Stripe Webhook Configuration
-**Development (Stripe CLI):**
-- URL: `http://localhost:3001/api/stripe/webhook`
-- Secret: `whsec_6051d704e69977fd9211cd41259f4f118eed67f8bb1e747ebde46ab4ed5caecd`
-- Command: `stripe listen --forward-to localhost:3001/api/stripe/webhook`
+### Database Management
+```bash
+# Prisma commands
+npx prisma generate    # Generate Prisma client
+npx prisma migrate dev # Run migrations in development
+npx prisma studio      # Open Prisma Studio
 
-**Production:**
-- URL: `https://sportsdevil.co.uk/api/stripe/webhook`
-- Secret: `whsec_qMBpBwrTvpZUCBgiFoKbJADAPl8w8PwX`
-- Endpoint ID: `we_1RvPWkIl9c9ZTqpAhkhxJJGv`
+# Database scripts
+npm run db:check       # Check database connection
+npm run db:reset       # Comprehensive safe reset
+npm run db:backup      # Create database backup
+npm run db:essential   # Seed essential data only
+npm run db:products    # Create sample products
+npm run db:admin       # Create admin user
+```
 
-**Events Handled:**
-- `payment_intent.succeeded` - Email receipts sent automatically
-- `payment_intent.payment_failed` - Order marked as failed
-- `checkout.session.completed` - Order confirmation
-- `charge.dispute.created` - Dispute tracking
-- `invoice.payment_succeeded` - Subscription payments
+### Stripe & Webhooks
+```bash
+# Test Stripe webhook locally
+npm run test:webhook
 
-## Stripe Testing
-**Current Mode**: TEST MODE - No real charges
-**Test Card**: 4242 4242 4242 4242 (Exp: 12/34, CVC: 123)
-**Test Result**: ✅ Order SD-1755028201321-UZN6A6 created successfully
-**Receipt Email**: ✅ Automatic delivery to customer email via Stripe
-**Webhook Status**: ✅ Both development and production endpoints configured
+# Create test product in Stripe
+npm run stripe:test-product
+```
 
-**Status**: READY FOR VERCEL + SUPABASE DEPLOYMENT
+## Architecture & Structure
 
-## Technical Context (For New Chat Sessions)
+### Core Technologies
+- **Framework**: Next.js 15 with App Router
+- **Language**: TypeScript with strict mode
+- **Database**: PostgreSQL via Prisma ORM
+- **Authentication**: NextAuth with credentials + social providers
+- **Payments**: Stripe (checkout sessions, webhooks)
+- **Styling**: Tailwind CSS with Shadcn/ui components
+- **State Management**: Zustand for client state, React Query for server state
+- **Deployment**: Vercel (London region - lhr1)
 
-### **Recent Work Completed:**
-- **Date**: August 14, 2025  
-- **Commit**: v10.2 (Hash: 5d5cd1c)
-- **Files Changed**: 2,493 files with 116,389 insertions
-- **Major Focus**: Fixed infinite React render loops and performance optimization
+### Directory Structure
+- `/app` - Next.js 15 App Router pages and API routes
+  - `/api` - API endpoints organized by feature
+  - `/admin` - Admin dashboard pages
+  - `/(auth)` - Authentication pages
+- `/components` - React components
+  - `/ui` - Shadcn/ui base components
+  - `/admin` - Admin-specific components
+- `/lib` - Core utilities and services
+  - `/services` - Business logic services (cart, product, order, etc.)
+  - `/integrations` - Third-party integrations
+- `/prisma` - Database schema and migrations
+- `/public/images/products` - Product images organized by category
+- `/hooks` - Custom React hooks
+- `/stores` - Zustand stores for client state
+- `/contexts` - React contexts for global state
 
-### **Key Components Fixed:**
-1. `/components/products-client.tsx` - Fixed infinite API requests and render loops
-2. `/components/product-filters.tsx` - Fixed URL update loops and memoization
-3. `/hooks/use-products.ts` - Stabilized React Query keys
-4. `/components/header.tsx` - Added "Coming Soon" banners to non-cricket menus
-5. `/.gitignore` - Enhanced with 200+ security patterns
+### Key Services & Patterns
 
-### **Critical Performance Fixes Applied:**
-- **ProductsClient**: Added `stableCategories` memoization and proper `useCallback` usage  
-- **ProductFilters**: Increased debounce time to 500ms, stabilized filter objects
-- **React Query**: Used JSON.stringify for stable cache keys
-- **Navigation**: Fixed home/logo clicks causing infinite products page loading
+1. **Authentication Flow**
+   - NextAuth handles authentication with session caching
+   - Support for credentials and social logins
+   - Session data cached for 15 minutes for performance
+   - Auth utilities in `/lib/auth.ts` and `/lib/client-auth.ts`
 
-### **Root Causes Identified & Fixed:**
-1. **Unstable Array Dependencies**: `filters.categories.join(',')` recreating strings
-2. **React Query Key Instability**: Object spread creating new objects every render
-3. **URL Update Loops**: Filter objects recreated on every render
-4. **Missing Memoization**: Functions and objects lacked proper `useCallback`/`useMemo`
+2. **Database Access**
+   - All database access through Prisma client (`/lib/prisma.ts`)
+   - Service layer pattern in `/lib/services/`
+   - Connection pooling and query optimization enabled
 
-### **Before/After Performance:**
-- **Before**: 100+ render cycles/second, hundreds of API requests/minute, console spam
-- **After**: Controlled renders, API requests only when needed, clean console logs
+3. **Cart System**
+   - Server-side cart persistence for logged-in users
+   - Client-side cart state with Zustand
+   - Cart sync between client and server via `/components/cart-sync-provider.tsx`
+   - API endpoints: `/api/cart/*`
 
-### **Deployment Readiness:**
-- ✅ All sensitive data excluded from git
-- ✅ Zero TypeScript compilation errors  
-- ✅ Zero infinite render loops
-- ✅ Complete Stripe checkout flow functional
-- ✅ All navigation working perfectly
-- ✅ Ready for major Vercel + Supabase refactor
+4. **Product Management**
+   - Multi-category support with parent-child relationships
+   - Product attributes and variations system
+   - Image optimization with Next.js Image component
+   - Search with fuzzy matching and filters
 
-### **Next Steps for New Chat:**
-- Major deployment refactor using Vercel for hosting
-- Supabase integration for database and backend services  
-- Production environment configuration
-- Performance monitoring setup
+5. **Payment Processing**
+   - Stripe checkout sessions for payments
+   - Webhook handling for order fulfillment
+   - Test and production webhook endpoints
+   - Payment security in `/lib/security/payment-security.ts`
+
+6. **Admin Dashboard**
+   - Role-based access control (RBAC)
+   - Analytics and reporting
+   - Product and order management
+   - Integration management
+
+### Performance Optimizations
+
+1. **Build Optimizations**
+   - Turbopack enabled for faster development
+   - Package import optimizations for Radix UI and other libraries
+   - Chunk splitting for optimal bundle sizes
+   - Image optimization with WebP/AVIF formats
+
+2. **Caching Strategy**
+   - Session caching (15 minutes)
+   - User data caching (10 minutes)
+   - Analytics cache in `/lib/cache/analytics-cache.ts`
+   - Static asset caching with immutable headers
+
+3. **Development Settings**
+   - HTTPS disabled for local development
+   - Webpack filesystem cache enabled
+   - Module resolution optimized
+   - Telemetry disabled
+
+### Environment Variables
+
+Key environment variables required:
+- `DATABASE_URL` - PostgreSQL connection string
+- `NEXTAUTH_URL` - Application URL
+- `NEXTAUTH_SECRET` - NextAuth secret key
+- `STRIPE_SECRET_KEY` - Stripe secret key
+- `STRIPE_PUBLISHABLE_KEY` - Stripe public key
+- `STRIPE_WEBHOOK_SECRET` - Stripe webhook signing secret
+- `SENTRY_*` - Sentry configuration (optional)
+
+### Security Considerations
+
+- CSRF protection enabled
+- Payment security validation
+- Role-based access control for admin
+- Input validation and sanitization
+- Secure session management
+- Environment-specific security headers
+
+### Testing Approach
+
+- Jest for unit tests
+- Security tests in `/tests/security.test.ts`
+- Stripe webhook testing scripts
+- Database connection testing
+- Integration test utilities in `/lib/integration-testing.ts`
+
+### Deployment Notes
+
+- Deployed on Vercel with London region (lhr1)
+- Build command: `npm run build`
+- API routes have 30-second max duration
+- Automatic source map upload to Sentry in production
+- Headers and redirects configured in `vercel.json`

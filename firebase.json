@@ -1,0 +1,15 @@
+{
+  "hosting": {
+    "site": "sportsdevil",
+    "public": "public_firebase",
+    "rewrites": [
+      {
+        "source": "**",
+        "run": {
+          "serviceId": "sports-devil",
+          "region": "europe-west2"
+        }
+      }
+    ]
+  }
+}

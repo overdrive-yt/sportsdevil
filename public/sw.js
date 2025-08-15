@@ -38,9 +38,24 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     Promise.all([
       // Cache critical static assets
-      caches.open(STATIC_CACHE_NAME).then((cache) => {
+      caches.open(STATIC_CACHE_NAME).then(async (cache) => {
         console.log('📦 Caching critical static assets')
-        return cache.addAll(CRITICAL_ASSETS.filter(url => !url.includes('/_next/')))
+        const filteredAssets = CRITICAL_ASSETS.filter(url => !url.includes('/_next/'))
+        
+        // Add assets one by one to handle failures gracefully
+        for (const asset of filteredAssets) {
+          try {
+            const response = await fetch(asset)
+            if (response.ok) {
+              await cache.put(asset, response)
+              console.log(`✅ Cached: ${asset}`)
+            } else {
+              console.log(`⚠️ Failed to cache ${asset}: ${response.status}`)
+            }
+          } catch (error) {
+            console.log(`⚠️ Failed to cache ${asset}:`, error.message)
+          }
+        }
       }),
       
       // Pre-warm API cache
@@ -52,9 +67,11 @@ self.addEventListener('install', (event) => {
             if (response.ok) {
               await cache.put(endpoint, response.clone())
               console.log(`✅ Pre-cached: ${endpoint}`)
+            } else {
+              console.log(`⚠️ Failed to pre-cache ${endpoint}: ${response.status}`)
             }
           } catch (error) {
-            console.log(`⚠️ Failed to pre-cache: ${endpoint}`)
+            console.log(`⚠️ Failed to pre-cache: ${endpoint}`, error.message)
           }
         }
       })

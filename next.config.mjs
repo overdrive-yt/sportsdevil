@@ -318,7 +318,7 @@ const nextConfig = {
       },
       {
         key: 'Cross-Origin-Embedder-Policy',
-        value: 'require-corp',
+        value: 'credentialless',
       },
       {
         key: 'Cross-Origin-Opener-Policy',
@@ -390,8 +390,8 @@ const nextConfig = {
   // Remove PoweredBy header
   poweredByHeader: false,
 
-  // Generate standalone output for better performance - DISABLED for Vercel build debugging
-  // output: 'standalone',
+  // Generate standalone output for Docker deployment
+  output: 'standalone',
 
   // TypeScript strict mode for better code quality
   typescript: {
