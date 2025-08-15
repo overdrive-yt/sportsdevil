@@ -326,7 +326,7 @@ const nextConfig = {
       },
       {
         key: 'Cross-Origin-Resource-Policy',
-        value: 'same-site',
+        value: 'cross-origin',
       },
       {
         key: 'Content-Security-Policy',

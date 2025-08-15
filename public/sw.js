@@ -5,6 +5,7 @@ const STATIC_CACHE_NAME = 'sports-devil-static-v9.12'
 // Critical resources to cache immediately
 const CRITICAL_ASSETS = [
   '/',
+  '/favicon.ico',
   '/images/site_hero.jpeg',
   '/images/cricket-equipment.jpg',
   '/images/logo-dark.png',
