@@ -24,6 +24,10 @@ const nextConfig = {
       '@/components': join(__dirname, 'components'),
       '@/lib': join(__dirname, 'lib'),
       '@/hooks': join(__dirname, 'hooks'),
+      // Explicit problematic imports for Turbopack
+      '@/lib/add-ons/services': join(__dirname, 'lib/add-ons/services.ts'),
+      '@/lib/prisma': join(__dirname, 'lib/prisma.ts'),
+      '@/lib/auth': join(__dirname, 'lib/auth.ts'),
     },
   },
 
@@ -139,6 +143,10 @@ const nextConfig = {
           '@/hooks': join(__dirname, 'hooks'),
           '@/stores': join(__dirname, 'stores'),
           '@/app': join(__dirname, 'app'),
+          // Explicit problematic imports
+          '@/lib/add-ons/services': join(__dirname, 'lib/add-ons/services.ts'),
+          '@/lib/prisma': join(__dirname, 'lib/prisma.ts'),
+          '@/lib/auth': join(__dirname, 'lib/auth.ts'),
         },
         // Optimize module resolution order
         mainFields: ['browser', 'module', 'main'],
