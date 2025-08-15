@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server'
-import { requirePermission, getCurrentUser } from '@/lib/rbac'
+import { requirePermission, getCurrentUser } from '../../../../lib/rbac'
 import { prisma } from '../../lib/prisma'
 import { createSuccessResponse, createErrorResponse } from '../../lib/api/responses'
 import { checkRateLimit, getRateLimitIdentifier } from '../../lib/api/middleware'

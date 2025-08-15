@@ -2,7 +2,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '../../lib/auth'
-import { IntegrationTestingFramework } from '@/lib/integration-testing'
+import { IntegrationTestingFramework } from '../../../../lib/integration-testing'
 
 // POST /api/integrations/test - Run integration tests
 export async function POST(request: NextRequest) {

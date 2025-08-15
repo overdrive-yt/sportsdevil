@@ -3,7 +3,7 @@ import { prisma } from '../lib/prisma'
 import { createSuccessResponse } from '../lib/api/responses'
 import { handleApiError, ValidationError } from '../lib/api/errors'
 import { checkRateLimit, getRateLimitIdentifier } from '../lib/api/middleware'
-import { buildSearchQuery, sanitizeSearchQuery } from '@/lib/utils/search'
+import { buildSearchQuery, sanitizeSearchQuery } from '../../../lib/utils/search'
 
 export async function GET(request: NextRequest) {
   try {

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { CricketGuideManager } from '@/lib/product-features'
+import { CricketGuideManager } from '../../../../lib/product-features'
 
 export async function GET(
   request: NextRequest,

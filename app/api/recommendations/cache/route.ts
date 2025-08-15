@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { RecommendationEngine } from '@/lib/ai/recommendations'
+import { RecommendationEngine } from '../../../../lib/ai/recommendations'
 
 export async function DELETE() {
   try {

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '../../lib/auth'
-import { notificationService } from '@/lib/notifications'
+import { notificationService } from '../../../../lib/notifications'
 import { z } from 'zod'
 
 // Validation schema for notification requests

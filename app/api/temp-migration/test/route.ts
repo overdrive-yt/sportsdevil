@@ -2,7 +2,7 @@
 // Test WooCommerce API Connection
 
 import { NextRequest, NextResponse } from 'next/server'
-import { WooCommerceMigrationAPI } from '@/lib/temp-migration/woocommerce-api'
+import { WooCommerceMigrationAPI } from '../../../../lib/temp-migration/woocommerce-api'
 
 export async function POST(request: NextRequest) {
   try {

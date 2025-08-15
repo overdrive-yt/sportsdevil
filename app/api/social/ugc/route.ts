@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '../../lib/auth'
-import { ugcManager } from '@/lib/social-media'
+import { ugcManager } from '../../../../lib/social-media'
 import { z } from 'zod'
 
 const submitUGCSchema = z.object({

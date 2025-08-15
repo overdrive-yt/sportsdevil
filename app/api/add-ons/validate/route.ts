@@ -65,7 +65,7 @@ export async function POST(request: NextRequest) {
         )
 
         // Get service details for estimated days
-        const { ADD_ON_SERVICES } = await import('@/lib/add-ons/services')
+        const { ADD_ON_SERVICES } = await import('../../../../lib/add-ons/services')
         const service = ADD_ON_SERVICES.find(s => s.id === selection.serviceId)
         
         if (service) {

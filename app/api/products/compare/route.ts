@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { ProductComparison } from '@/lib/product-features'
+import { ProductComparison } from '../../../../lib/product-features'
 import { z } from 'zod'
 
 const compareRequestSchema = z.object({

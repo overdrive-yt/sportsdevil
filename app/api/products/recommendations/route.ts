@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '../../lib/auth'
-import { ProductRecommendationEngine } from '@/lib/product-features'
+import { ProductRecommendationEngine } from '../../../../lib/product-features'
 import { z } from 'zod'
 
 const recommendationRequestSchema = z.object({

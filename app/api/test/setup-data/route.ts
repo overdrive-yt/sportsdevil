@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '../../lib/auth'
-import { setupTestData, cleanupTestData } from '@/lib/test-data-setup'
+import { setupTestData, cleanupTestData } from '../../../../lib/test-data-setup'
 
 export async function POST(request: NextRequest) {
   try {

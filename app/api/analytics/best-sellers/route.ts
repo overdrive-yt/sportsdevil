@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '../../lib/prisma'
-import { analyticsCache, CacheKeys, AnalyticsCache } from '@/lib/cache/analytics-cache'
-import { serializePrice } from '@/lib/utils/price-formatting'
+import { analyticsCache, CacheKeys, AnalyticsCache } from '../../../../lib/cache/analytics-cache'
+import { serializePrice } from '../../../../lib/utils/price-formatting'
 
 export async function GET(request: Request) {
   try {

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { GDPRCompliance, CookieConsent } from '@/lib/gdpr'
+import { GDPRCompliance, CookieConsent } from '../../../../lib/gdpr'
 import { z } from 'zod'
 
 const consentSchema = z.object({

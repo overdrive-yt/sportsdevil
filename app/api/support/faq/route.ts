@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { FAQManager } from '@/lib/customer-support'
+import { FAQManager } from '../../../../lib/customer-support'
 import { z } from 'zod'
 
 const faqRequestSchema = z.object({

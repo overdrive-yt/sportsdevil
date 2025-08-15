@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '../../lib/auth'
-import { LiveChatManager } from '@/lib/customer-support'
+import { LiveChatManager } from '../../../../lib/customer-support'
 import { z } from 'zod'
 
 const createChatSchema = z.object({

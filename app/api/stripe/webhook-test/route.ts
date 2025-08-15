@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { stripe } from '@/lib/stripe'
+import { stripe } from '../../../../lib/stripe'
 import { prisma } from '../../lib/prisma'
 import { headers } from 'next/headers'
 import Stripe from 'stripe'
-import { EmailService } from '@/lib/email'
+import { EmailService } from '../../../../lib/email'
 
 // TEST WEBHOOK ENDPOINT - Only for overdrive1612@gmail.com
 export async function POST(request: NextRequest) {

@@ -1,9 +1,9 @@
 import { NextRequest } from 'next/server'
-import { OrderService } from '../../../lib/services/order.service'
-import { createSuccessResponse } from '../../../lib/api/responses'
-import { handleApiError } from '../../../lib/api/errors'
-import { requireAdmin, validateRequestBody } from '../../../lib/api/middleware'
-import { orderStatusUpdateSchema } from '../../../lib/api/validation'
+import { OrderService } from '../../../../../lib/services/order.service'
+import { createSuccessResponse } from '../../../../../lib/api/responses'
+import { handleApiError } from '../../../../../lib/api/errors'
+import { requireAdmin, validateRequestBody } from '../../../../../lib/api/middleware'
+import { orderStatusUpdateSchema } from '../../../../../lib/api/validation'
 
 interface RouteParams {
   params: Promise<{

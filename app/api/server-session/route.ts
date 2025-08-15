@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { getServerStartTime } from '@/lib/server-session'
+import { getServerStartTime } from '../../../lib/server-session'
 
 export async function GET() {
   return NextResponse.json({

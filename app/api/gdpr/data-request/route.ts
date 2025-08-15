@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireAuth } from '../../lib/api/middleware'
-import { GDPRCompliance, DataSubjectRight } from '@/lib/gdpr'
+import { GDPRCompliance, DataSubjectRight } from '../../../../lib/gdpr'
 import { prisma } from '../../lib/prisma'
 import { z } from 'zod'
 

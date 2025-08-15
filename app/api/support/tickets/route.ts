@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '../../lib/auth'
-import { supportTicketManager, SupportTicketManager } from '@/lib/customer-support'
+import { supportTicketManager, SupportTicketManager } from '../../../../lib/customer-support'
 import { z } from 'zod'
 
 const createTicketSchema = z.object({

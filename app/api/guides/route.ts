@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { CricketGuideManager } from '@/lib/product-features'
+import { CricketGuideManager } from '../../../lib/product-features'
 import { z } from 'zod'
 
 const guideRequestSchema = z.object({

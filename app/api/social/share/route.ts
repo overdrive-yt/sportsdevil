@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { socialShareManager } from '@/lib/social-media'
+import { socialShareManager } from '../../../../lib/social-media'
 import { z } from 'zod'
 
 const shareRequestSchema = z.object({

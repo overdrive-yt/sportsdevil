@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '../../lib/auth'
-import { metricsTracker } from '@/lib/social-media'
+import { metricsTracker } from '../../../../lib/social-media'
 import { z } from 'zod'
 
 const updateMetricsSchema = z.object({

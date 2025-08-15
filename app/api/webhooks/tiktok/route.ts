@@ -2,8 +2,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import crypto from 'crypto'
 import { PrismaClient } from '@prisma/client'
-import { TikTokShopIntegration } from '@/lib/integrations/tiktok-shop'
-import { IntegrationAuthManager } from '@/lib/integration-auth'
+import { TikTokShopIntegration } from '../../../../lib/integrations/tiktok-shop'
+import { IntegrationAuthManager } from '../../../../lib/integration-auth'
 
 const prisma = new PrismaClient()
 

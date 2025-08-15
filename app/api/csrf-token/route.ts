@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server'
-import { getCSRFToken } from '@/lib/csrf'
+import { getCSRFToken } from '../../../lib/csrf'
 
 export async function GET(request: NextRequest) {
   return getCSRFToken(request)

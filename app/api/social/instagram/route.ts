@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { instagramManager } from '@/lib/social-media'
+import { instagramManager } from '../../../../lib/social-media'
 import { z } from 'zod'
 
 const instagramRequestSchema = z.object({

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { analyticsCache } from '@/lib/cache/analytics-cache'
+import { analyticsCache } from '../../../../lib/cache/analytics-cache'
 
 export async function GET() {
   try {

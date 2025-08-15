@@ -2,8 +2,8 @@
 // Start WooCommerce Migration Process
 
 import { NextRequest, NextResponse } from 'next/server'
-import { WooCommerceMigrationAPI } from '@/lib/temp-migration/woocommerce-api'
-import { DatabaseMigrator } from '@/lib/temp-migration/database-migrator'
+import { WooCommerceMigrationAPI } from '../../../../lib/temp-migration/woocommerce-api'
+import { DatabaseMigrator } from '../../../../lib/temp-migration/database-migrator'
 
 // Store migration instance globally for progress tracking
 let currentMigration: DatabaseMigrator | null = null

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '../../lib/auth'
-import { reviewManager } from '@/lib/social-media'
+import { reviewManager } from '../../../../lib/social-media'
 import { z } from 'zod'
 
 const submitReviewSchema = z.object({

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { requireValidUser } from '@/lib/auth-validation'
+import { requireValidUser } from '../../../../lib/auth-validation'
 import { prisma } from '../../lib/prisma'
 
 export async function GET(request: NextRequest) {

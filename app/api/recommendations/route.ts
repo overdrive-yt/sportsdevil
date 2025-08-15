@@ -3,7 +3,7 @@ import {
   RecommendationEngine,
   type RecommendationContext,
   type RecommendationType
-} from '@/lib/ai/recommendations'
+} from '../../../lib/ai/recommendations'
 
 export async function GET(request: NextRequest) {
   try {
