@@ -1,9 +1,9 @@
 import { NextRequest } from 'next/server'
-import { UserService } from '@/lib/services/user.service'
-import { createSuccessResponse } from '@/lib/api/responses'
-import { handleApiError } from '@/lib/api/errors'
-import { requireAuth, validateRequestBody } from '@/lib/api/middleware'
-import { changePasswordSchema } from '@/lib/api/validation'
+import { UserService } from '../../lib/services/user.service'
+import { createSuccessResponse } from '../../lib/api/responses'
+import { handleApiError } from '../../lib/api/errors'
+import { requireAuth, validateRequestBody } from '../../lib/api/middleware'
+import { changePasswordSchema } from '../../lib/api/validation'
 
 export async function POST(request: NextRequest) {
   try {

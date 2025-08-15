@@ -1,8 +1,8 @@
 import { NextRequest } from 'next/server'
-import { SearchService } from '@/lib/services/search.service'
-import { createSuccessResponse } from '@/lib/api/responses'
-import { handleApiError } from '@/lib/api/errors'
-import { checkRateLimit, getRateLimitIdentifier } from '@/lib/api/middleware'
+import { SearchService } from '../../lib/services/search.service'
+import { createSuccessResponse } from '../../lib/api/responses'
+import { handleApiError } from '../../lib/api/errors'
+import { checkRateLimit, getRateLimitIdentifier } from '../../lib/api/middleware'
 
 export async function GET(request: NextRequest) {
   try {

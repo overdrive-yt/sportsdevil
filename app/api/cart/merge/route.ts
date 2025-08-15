@@ -1,8 +1,8 @@
 import { NextRequest } from 'next/server'
-import { CartService } from '@/lib/services/cart.service'
-import { createSuccessResponse } from '@/lib/api/responses'
-import { handleApiError } from '@/lib/api/errors'
-import { requireAuth, validateRequestBody } from '@/lib/api/middleware'
+import { CartService } from '../../lib/services/cart.service'
+import { createSuccessResponse } from '../../lib/api/responses'
+import { handleApiError } from '../../lib/api/errors'
+import { requireAuth, validateRequestBody } from '../../lib/api/middleware'
 import { z } from 'zod'
 
 const mergeCartSchema = z.object({

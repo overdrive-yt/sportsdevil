@@ -1,9 +1,9 @@
 import { NextRequest } from 'next/server'
-import { OrderService } from '@/lib/services/order.service'
-import { createCreatedResponse } from '@/lib/api/responses'
-import { handleApiError } from '@/lib/api/errors'
-import { requireAuth, validateRequestBody } from '@/lib/api/middleware'
-import { orderSchema } from '@/lib/api/validation'
+import { OrderService } from '../lib/services/order.service'
+import { createCreatedResponse } from '../lib/api/responses'
+import { handleApiError } from '../lib/api/errors'
+import { requireAuth, validateRequestBody } from '../lib/api/middleware'
+import { orderSchema } from '../lib/api/validation'
 
 export async function POST(request: NextRequest) {
   try {

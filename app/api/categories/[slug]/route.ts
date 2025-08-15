@@ -1,8 +1,8 @@
 import { NextRequest } from 'next/server'
-import { CategoryService } from '@/lib/services/category.service'
-import { createSuccessResponse } from '@/lib/api/responses'
-import { handleApiError } from '@/lib/api/errors'
-import { checkRateLimit, getRateLimitIdentifier } from '@/lib/api/middleware'
+import { CategoryService } from '../../lib/services/category.service'
+import { createSuccessResponse } from '../../lib/api/responses'
+import { handleApiError } from '../../lib/api/errors'
+import { checkRateLimit, getRateLimitIdentifier } from '../../lib/api/middleware'
 
 interface RouteContext {
   params: Promise<{

@@ -1,9 +1,9 @@
 import { NextRequest } from 'next/server'
-import { CartService } from '@/lib/services/cart.service'
-import { createSuccessResponse, createNoContentResponse } from '@/lib/api/responses'
-import { handleApiError } from '@/lib/api/errors'
-import { requireAuth, validateRequestBody } from '@/lib/api/middleware'
-import { updateCartItemSchema } from '@/lib/api/validation'
+import { CartService } from '../../lib/services/cart.service'
+import { createSuccessResponse, createNoContentResponse } from '../../lib/api/responses'
+import { handleApiError } from '../../lib/api/errors'
+import { requireAuth, validateRequestBody } from '../../lib/api/middleware'
+import { updateCartItemSchema } from '../../lib/api/validation'
 
 interface RouteContext {
   params: Promise<{

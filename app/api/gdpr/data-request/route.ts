@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { requireAuth } from '@/lib/api/middleware'
+import { requireAuth } from '../../lib/api/middleware'
 import { GDPRCompliance, DataSubjectRight } from '@/lib/gdpr'
-import { prisma } from '@/lib/prisma'
+import { prisma } from '../../lib/prisma'
 import { z } from 'zod'
 
 const dataRequestSchema = z.object({

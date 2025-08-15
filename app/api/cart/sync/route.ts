@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { CartService } from '@/lib/services/cart.service'
-import { createSuccessResponse, createCreatedResponse } from '@/lib/api/responses'
-import { handleApiError } from '@/lib/api/errors'
-import { requireAuth, validateRequestBody, checkRateLimit, getRateLimitIdentifier } from '@/lib/api/middleware'
+import { CartService } from '../../lib/services/cart.service'
+import { createSuccessResponse, createCreatedResponse } from '../../lib/api/responses'
+import { handleApiError } from '../../lib/api/errors'
+import { requireAuth, validateRequestBody, checkRateLimit, getRateLimitIdentifier } from '../../lib/api/middleware'
 import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
+import { authOptions } from '../../lib/auth'
 import { z } from 'zod'
 
 const syncCartSchema = z.object({

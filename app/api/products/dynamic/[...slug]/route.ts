@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
+import { prisma } from '../../../lib/prisma'
 import { analyticsCache, AnalyticsCache } from '@/lib/cache/analytics-cache'
 
 export async function GET(

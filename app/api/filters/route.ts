@@ -1,8 +1,8 @@
 import { NextRequest } from 'next/server'
-import { prisma } from '@/lib/prisma'
-import { createSuccessResponse } from '@/lib/api/responses'
-import { handleApiError } from '@/lib/api/errors'
-import { checkRateLimit, getRateLimitIdentifier } from '@/lib/api/middleware'
+import { prisma } from '../lib/prisma'
+import { createSuccessResponse } from '../lib/api/responses'
+import { handleApiError } from '../lib/api/errors'
+import { checkRateLimit, getRateLimitIdentifier } from '../lib/api/middleware'
 
 export async function GET(request: NextRequest) {
   try {

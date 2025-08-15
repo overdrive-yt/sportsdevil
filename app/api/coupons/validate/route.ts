@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireValidUser } from '@/lib/auth-validation'
-import { prisma } from '@/lib/prisma'
-import { handleApiError } from '@/lib/api/errors'
+import { prisma } from '../../lib/prisma'
+import { handleApiError } from '../../lib/api/errors'
 
 export async function POST(request: NextRequest) {
   try {
