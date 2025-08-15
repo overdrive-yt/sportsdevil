@@ -410,8 +410,8 @@ const nextConfig = {
   // Remove PoweredBy header
   poweredByHeader: false,
 
-  // Generate standalone output for better performance
-  output: 'standalone',
+  // Generate standalone output for better performance - DISABLED for Vercel build debugging
+  // output: 'standalone',
 
   // TypeScript strict mode for better code quality
   typescript: {
