@@ -14,10 +14,6 @@
     {
       "path": "/api/cron/cleanup-sessions",
       "schedule": "0 2 * * *"
-    },
-    {
-      "path": "/api/cron/update-stock",
-      "schedule": "0 */6 * * *"
     }
   ],
   "redirects": [
