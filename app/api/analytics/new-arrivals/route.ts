@@ -14,7 +14,13 @@ export async function GET(request: Request) {
     const cached = analyticsCache.get(cacheKey)
     if (cached) {
       // Mark as cached and return
-      const cachedResponse = { ...cached, meta: { ...cached.meta, cached: true } }
+      const cachedResponse = { 
+        ...cached, 
+        meta: { 
+          ...(typeof cached === 'object' && cached !== null && 'meta' in cached ? (cached as any).meta : {}), 
+          cached: true 
+        } 
+      }
       return NextResponse.json(cachedResponse)
     }
     

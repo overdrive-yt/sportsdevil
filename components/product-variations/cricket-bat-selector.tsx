@@ -75,7 +75,7 @@ export function CricketBatSelector({
       onVariationChange?.(variation)
     } else {
       setCurrentPrice(basePrice)
-      onVariationChange?(null)
+      onVariationChange?.(null)
     }
   }, [selectedGrade, selectedWeight, selectedGrain, selectedHandle, basePrice, baseSku, onVariationChange])
 

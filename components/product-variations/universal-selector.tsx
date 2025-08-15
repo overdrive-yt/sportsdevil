@@ -73,7 +73,7 @@ export function UniversalVariationSelector({
       onVariationChange?.(variation)
     } else {
       setCurrentPrice(basePrice)
-      onVariationChange?(null)
+      onVariationChange?.(null)
     }
   }, [selections, template, basePrice, baseSku, onVariationChange])
 

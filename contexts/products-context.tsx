@@ -121,8 +121,7 @@ export function ProductsProvider({ children }: { children: ReactNode }) {
       console.log('📡 ProductsContext: Making API call to load products...')
       const response = await apiClient.getProducts({ 
         limit: 50, // Sufficient for all cricket products
-        sortBy: 'name',
-        sortOrder: 'asc'
+        sort: 'name'
       })
       
       console.log('📦 ProductsContext: API response received:', {

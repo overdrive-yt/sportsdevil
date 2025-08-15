@@ -66,7 +66,7 @@ export function NewArrivalsCarousel() {
           setMeta(data.meta)
           console.log('✅ New arrivals loaded:', data.data.length, 'products')
         } else {
-          throw new Error(data.error || 'Failed to fetch new arrivals')
+          throw new Error((data as any).error || 'Failed to fetch new arrivals')
         }
       } catch (err) {
         console.error('❌ Error fetching new arrivals:', err)

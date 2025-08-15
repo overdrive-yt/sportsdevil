@@ -21,7 +21,13 @@ export async function GET(
     const cached = analyticsCache.get(cacheKey)
     if (cached) {
       console.log(`✅ Cache hit for dynamic product page: ${slugArray.join('/')}`)
-      return NextResponse.json({ ...cached, meta: { ...cached.meta, cached: true } })
+      return NextResponse.json({ 
+        ...cached, 
+        meta: { 
+          ...(typeof cached === 'object' && cached !== null && 'meta' in cached ? (cached as any).meta : {}), 
+          cached: true 
+        } 
+      })
     }
 
     // Determine if this is a single product or category/listing
@@ -129,7 +135,7 @@ async function handleSingleProduct(slug: string) {
         name: currentCategory.name,
         href: `/product/${currentCategory.slug}`
       })
-      currentCategory = currentCategory.parent
+      currentCategory = currentCategory.parent as any
     }
     
     breadcrumbs.push(...categoryPath)
@@ -285,7 +291,7 @@ async function handleProductListing(
         name: currentCategory.name,
         href: `/product/${currentCategory.slug}`
       })
-      currentCategory = currentCategory.parent
+      currentCategory = currentCategory.parent as any
     }
     
     breadcrumbs.push(...categoryPath)

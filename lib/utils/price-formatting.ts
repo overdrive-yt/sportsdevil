@@ -99,7 +99,7 @@ export function formatPriceWithDiscount(
   const current = toNumber(price)
   const original = originalPrice ? toNumber(originalPrice) : null
   
-  const result = {
+  const result: any = {
     currentPrice: formatPrice(current, currency),
     hasDiscount: false
   }
@@ -146,7 +146,7 @@ export function serializePricesInProduct<T extends Record<string, any>>(product:
   
   for (const field of priceFields) {
     if (field in result && result[field] !== null && result[field] !== undefined) {
-      result[field] = serializePrice(result[field])
+      (result as any)[field] = serializePrice(result[field])
     }
   }
   

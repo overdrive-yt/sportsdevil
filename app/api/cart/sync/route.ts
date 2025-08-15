@@ -75,8 +75,8 @@ export async function POST(request: NextRequest) {
         // Sync local cart to database (replace database cart)
         result = await CartService.bulkSyncToDatabase(user.id, data.localCartItems)
         // Ensure finalCart property exists
-        if (result && !result.finalCart) {
-          result.finalCart = result.items || []
+        if (result && !('finalCart' in result)) {
+          (result as any).finalCart = result.items || []
         }
         break
         
@@ -97,7 +97,7 @@ export async function POST(request: NextRequest) {
         result = await CartService.syncLocalCartWithDatabase(user.id, data.localCartItems)
         // Ensure finalCart property exists
         if (result && !result.finalCart) {
-          result.finalCart = result.items || []
+          result.finalCart = (result as any).items || []
         }
         break
     }
@@ -108,7 +108,7 @@ export async function POST(request: NextRequest) {
       data: result,
       message: 'Cart synchronized successfully',
       // Add finalCart at root level for client compatibility
-      finalCart: result?.finalCart || result?.items || []
+      finalCart: (result as any)?.finalCart || (result as any)?.items || []
     }
     
     return NextResponse.json(responseData, { status: 200 })

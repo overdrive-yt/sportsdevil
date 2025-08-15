@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
       data: {
         name: addressData.name || validation.user!.name,
         address: addressData.address,
-        addressLine2: addressData.addressLine2,
+        // addressLine2 is not in the User model, skip it
         city: addressData.city,
         postalCode: addressData.postalCode,
         country: addressData.country,
@@ -90,7 +90,7 @@ export async function GET(request: NextRequest) {
       select: {
         name: true,
         address: true,
-        addressLine2: true,
+        // addressLine2: true, // Not in User model
         city: true,
         postalCode: true,
         country: true,
@@ -110,7 +110,7 @@ export async function GET(request: NextRequest) {
       data: {
         name: user.name,
         address: user.address,
-        addressLine2: user.addressLine2,
+        // addressLine2: null, // Not in User model
         city: user.city,
         postalCode: user.postalCode,
         country: user.country || 'GB',

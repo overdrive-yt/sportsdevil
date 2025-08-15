@@ -7,8 +7,6 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from './auth'
 import { prisma } from './prisma'
 import { NextRequest } from 'next/server'
-import { useState, useEffect } from 'react'
-import { useSession } from 'next-auth/react'
 
 // Define all possible permissions in the system
 const PERMISSIONS = {
@@ -486,40 +484,7 @@ export class RBACService {
   }
 }
 
-// React hook for client-side RBAC
-function useRBAC() {
-  const { data: session } = useSession()
-  const [userContext, setUserContext] = useState<UserContext | null>(null)
-
-  useEffect(() => {
-    if (session?.user) {
-      const user = session.user as any
-      setUserContext({
-        id: user.id,
-        email: user.email,
-        name: user.name,
-        role: user.role,
-        userType: user.userType || 'CUSTOMER',
-        permissions: user.permissions || [],
-        adminLevel: user.adminLevel,
-        department: user.department,
-      })
-    } else {
-      setUserContext(null)
-    }
-  }, [session])
-
-  return {
-    user: userContext,
-    hasPermission: (permission: Permission) => hasPermission(userContext, permission),
-    hasAnyPermission: (permissions: Permission[]) => hasAnyPermission(userContext, permissions),
-    hasAllPermissions: (permissions: Permission[]) => hasAllPermissions(userContext, permissions),
-    isAdmin: userContext?.userType === 'ADMIN',
-    isOwner: userContext?.adminLevel === 'OWNER',
-    isSuperAdmin: userContext?.adminLevel === 'SUPER_ADMIN',
-    loading: !session
-  }
-}
+// Note: React hook useRBAC removed - use lib/rbac-client.ts for client-side RBAC
 
 // Individual named exports for direct importing
 export {
@@ -538,7 +503,6 @@ export {
   isValidPermission,
   createPermissionMiddleware,
   canAccessResource,
-  useRBAC,
   PERMISSIONS,
   ROLE_PERMISSIONS
 }

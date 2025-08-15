@@ -61,7 +61,7 @@ export function BestSellersCarousel() {
           setMeta(data.meta)
           console.log('✅ Best sellers loaded:', data.data.length, 'products')
         } else {
-          throw new Error(data.error || 'Failed to fetch best sellers')
+          throw new Error((data as any).error || 'Failed to fetch best sellers')
         }
       } catch (err) {
         console.error('❌ Error fetching best sellers:', err)

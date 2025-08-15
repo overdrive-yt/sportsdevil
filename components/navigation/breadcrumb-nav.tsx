@@ -1,6 +1,6 @@
 "use client"
 
-import { Fragment } from 'react'
+import React, { Fragment } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { 
@@ -50,7 +50,7 @@ export function BreadcrumbNav({
   const getIcon = (iconName?: string) => {
     if (!iconName) return null
 
-    const iconMap: Record<string, JSX.Element> = {
+    const iconMap: Record<string, React.ReactElement> = {
       'home': <Home className="h-4 w-4" />,
       'package': <Package className="h-4 w-4" />,
       'search': <Search className="h-4 w-4" />,

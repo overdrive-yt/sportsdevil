@@ -50,3 +50,6 @@ Sentry.init({
     },
   },
 })
+
+// Export required hooks for Next.js 15+ navigation instrumentation
+export const onRouterTransitionStart = Sentry.captureRouterTransitionStart

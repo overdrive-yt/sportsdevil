@@ -206,6 +206,8 @@ export default function OrderConfirmationEmail(props: OrderConfirmationProps) {
             <Section style={{ textAlign: 'center', margin: '30px 0' }}>
               <Button
                 href={trackingUrl}
+                height={48}
+                width={200}
                 style={{
                   backgroundColor: '#000000',
                   color: '#ffffff',

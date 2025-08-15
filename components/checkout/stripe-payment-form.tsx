@@ -486,7 +486,7 @@ function PaymentForm({
     try {
       // Get address data from AddressElement for billing details
       const addressElement = elements.getElement('address')
-      let billingDetails = {
+      let billingDetails: any = {
         email: user?.email || '', // Required since email field is set to 'never'
       }
       

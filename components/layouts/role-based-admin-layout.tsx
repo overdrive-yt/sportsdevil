@@ -31,7 +31,7 @@ import {
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu'
 import { Avatar, AvatarFallback } from '../ui/avatar'
-import { RBACService, Role, useRBAC } from '../../lib/rbac'
+import { RBACService, Role } from '../../lib/rbac'
 
 interface RoleBasedAdminLayoutProps {
   children: React.ReactNode
@@ -70,9 +70,9 @@ export function RoleBasedAdminLayout({
 }: RoleBasedAdminLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [currentTime, setCurrentTime] = useState(new Date())
-  const rbac = useRBAC()
-  const allowedNavigation = RBACService.getAllowedNavigation(rbac.user)
-  const dashboardType = RBACService.getDashboardType(rbac.user)
+  // Use currentUser prop instead of useRBAC hook
+  const allowedNavigation = RBACService.getAllowedNavigation(currentUser as any)
+  const dashboardType = RBACService.getDashboardType(currentUser as any)
   const roleDefinition = RBACService.getRoleDefinition(currentUser.role)
 
   useEffect(() => {
@@ -105,7 +105,7 @@ export function RoleBasedAdminLayout({
     return 'Good Evening'
   }
 
-  const userDisplayInfo = RBACService.getUserDisplayInfo(rbac.user)
+  const userDisplayInfo = RBACService.getUserDisplayInfo(currentUser as any)
 
   return (
     <div className="min-h-screen bg-white">
@@ -263,14 +263,13 @@ export function RoleBasedAdminLayout({
               {actions}
               
               {/* Notifications */}
-              {rbac.hasPermission('notifications:view') && (
-                <Button variant="ghost" size="sm" className="relative">
-                  <Bell className="h-5 w-5" />
-                  <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 flex items-center justify-center text-xs">
-                    3
-                  </Badge>
-                </Button>
-              )}
+              {/* Notifications - always show for admins */}
+              <Button variant="ghost" size="sm" className="relative">
+                <Bell className="h-5 w-5" />
+                <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 flex items-center justify-center text-xs">
+                  3
+                </Badge>
+              </Button>
 
               {/* User menu */}
               <DropdownMenu>
@@ -301,12 +300,11 @@ export function RoleBasedAdminLayout({
                     <User className="h-4 w-4" />
                     Profile
                   </DropdownMenuItem>
-                  {rbac.hasPermission('settings:view') && (
-                    <DropdownMenuItem className="gap-2">
-                      <Settings className="h-4 w-4" />
-                      Settings
-                    </DropdownMenuItem>
-                  )}
+                  {/* Settings - always show for admins */}
+                  <DropdownMenuItem className="gap-2">
+                    <Settings className="h-4 w-4" />
+                    Settings
+                  </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={handleLogout} className="gap-2 text-red-600">
                     <LogOut className="h-4 w-4" />

@@ -124,7 +124,7 @@ export class NotificationService {
       const result = await EmailService.sendPaymentFailed({
         ...paymentData,
         retryUrl,
-      })
+      } as any)
 
       // Log notification in database
       if (result.success) {

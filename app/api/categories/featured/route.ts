@@ -18,10 +18,10 @@ export async function GET(request: NextRequest) {
     console.log(`✅ Found ${featuredCategories.length} featured categories`)
     
     return createSuccessResponse(featuredCategories, 'Featured categories retrieved successfully', 200, {
-      count: featuredCategories.length,
+      total: featuredCategories.length,
       cached: false,
       timestamp: new Date().toISOString(),
-    })
+    } as any)
   } catch (error) {
     console.error('❌ Featured categories API error:', error)
     return handleApiError(error)

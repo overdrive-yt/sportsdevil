@@ -14,7 +14,13 @@ export async function GET(request: Request) {
     const cached = analyticsCache.get(cacheKey)
     if (cached) {
       // Mark as cached and return
-      const cachedResponse = { ...cached, meta: { ...cached.meta, cached: true } }
+      const cachedResponse = { 
+        ...cached, 
+        meta: { 
+          ...(typeof cached === 'object' && cached !== null && 'meta' in cached ? (cached as any).meta : {}), 
+          cached: true 
+        } 
+      }
       return NextResponse.json(cachedResponse)
     }
     
@@ -198,7 +204,7 @@ export async function GET(request: Request) {
         total: productsWithSales.length,
         period: `${days} days`,
         hasActualSales: productsWithSales.some(p => p.analytics.totalQuantitySold > 0),
-        fallbackUsed: productsWithSales.some(p => p.analytics.isFallback),
+        fallbackUsed: productsWithSales.some(p => 'isFallback' in p.analytics && p.analytics.isFallback),
         cached: false,
         timestamp: new Date().toISOString()
       }
