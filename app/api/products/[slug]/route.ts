@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { ProductService } from '../../lib/services/product.service'
-import { createSuccessResponse } from '../../lib/api/responses'
-import { handleApiError } from '../../lib/api/errors'
-import { checkRateLimit, getRateLimitIdentifier } from '../../lib/api/middleware'
-import { prisma } from '../../lib/prisma'
+import { ProductService } from '../../../../lib/services/product.service'
+import { createSuccessResponse } from '../../../../lib/api/responses'
+import { handleApiError } from '../../../../lib/api/errors'
+import { checkRateLimit, getRateLimitIdentifier } from '../../../../lib/api/middleware'
+import { prisma } from '../../../../lib/prisma'
 
 interface RouteParams {
   params: Promise<{

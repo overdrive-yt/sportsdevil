@@ -1,8 +1,8 @@
 import { NextRequest } from 'next/server'
-import { ProductService } from '../../lib/services/product.service'
-import { createSuccessResponse } from '../../lib/api/responses'
-import { handleApiError } from '../../lib/api/errors'
-import { checkRateLimit, getRateLimitIdentifier } from '../../lib/api/middleware'
+import { ProductService } from '../../../../lib/services/product.service'
+import { createSuccessResponse } from '../../../../lib/api/responses'
+import { handleApiError } from '../../../../lib/api/errors'
+import { checkRateLimit, getRateLimitIdentifier } from '../../../../lib/api/middleware'
 
 export async function GET(request: NextRequest) {
   try {

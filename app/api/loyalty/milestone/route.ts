@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
-import { authOptions } from '../../lib/auth'
-import { prisma } from '../../lib/prisma'
-import { checkAndRewardMilestones, getMilestoneProgress } from '../../lib/services/loyalty-milestone.service'
+import { authOptions } from '../../../../lib/auth'
+import { prisma } from '../../../../lib/prisma'
+import { checkAndRewardMilestones, getMilestoneProgress } from '../../../../lib/services/loyalty-milestone.service'
 
 /**
  * POST /api/loyalty/milestone

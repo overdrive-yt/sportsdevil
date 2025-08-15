@@ -1,8 +1,8 @@
 import { NextRequest } from 'next/server'
-import { CartService } from '../../lib/services/cart.service'
-import { createSuccessResponse } from '../../lib/api/responses'
-import { handleApiError } from '../../lib/api/errors'
-import { requireAuth, checkRateLimit, getRateLimitIdentifier } from '../../lib/api/middleware'
+import { CartService } from '../../../../lib/services/cart.service'
+import { createSuccessResponse } from '../../../../lib/api/responses'
+import { handleApiError } from '../../../../lib/api/errors'
+import { requireAuth, checkRateLimit, getRateLimitIdentifier } from '../../../../lib/api/middleware'
 
 export async function GET(request: NextRequest) {
   try {

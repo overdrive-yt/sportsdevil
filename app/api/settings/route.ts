@@ -1,6 +1,6 @@
 // V9.15: Settings Persistence API Endpoint
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '../lib/prisma'
+import { prisma } from '../../../lib/prisma'
 
 interface SystemSettings {
   general: {

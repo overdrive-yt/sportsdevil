@@ -1,7 +1,7 @@
 // V9.11.5 Integration Testing API Endpoint
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
-import { authOptions } from '../../lib/auth'
+import { authOptions } from '../../../../lib/auth'
 import { IntegrationTestingFramework } from '../../../../lib/integration-testing'
 
 // POST /api/integrations/test - Run integration tests

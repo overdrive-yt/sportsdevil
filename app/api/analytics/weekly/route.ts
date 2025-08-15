@@ -1,6 +1,6 @@
 // V9.15: Weekly Analytics API Endpoint
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '../../lib/prisma'
+import { prisma } from '../../../../lib/prisma'
 
 interface WeeklyAnalytics {
   revenue: {

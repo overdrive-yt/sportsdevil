@@ -1,9 +1,9 @@
 import { NextRequest } from 'next/server'
-import { ProductService } from '../lib/services/product.service'
-import { createSuccessResponse, createCreatedResponse } from '../lib/api/responses'
-import { handleApiError } from '../lib/api/errors'
-import { requireAdmin, validateRequestBody, validateSearchParams, checkRateLimit, getRateLimitIdentifier } from '../lib/api/middleware'
-import { productSchema, productQuerySchema } from '../lib/api/validation'
+import { ProductService } from '../../../lib/services/product.service'
+import { createSuccessResponse, createCreatedResponse } from '../../../lib/api/responses'
+import { handleApiError } from '../../../lib/api/errors'
+import { requireAdmin, validateRequestBody, validateSearchParams, checkRateLimit, getRateLimitIdentifier } from '../../../lib/api/middleware'
+import { productSchema, productQuerySchema } from '../../../lib/api/validation'
 
 export async function GET(request: NextRequest) {
   try {

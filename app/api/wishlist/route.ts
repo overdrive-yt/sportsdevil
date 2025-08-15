@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
-import { authOptions } from '../lib/auth'
-import { WishlistService } from '../lib/services/wishlist.service'
+import { authOptions } from '../../../lib/auth'
+import { WishlistService } from '../../../lib/services/wishlist.service'
 import { z } from 'zod'
 
 const addToWishlistSchema = z.object({

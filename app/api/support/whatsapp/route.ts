@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
-import { authOptions } from '../../lib/auth'
+import { authOptions } from '../../../../lib/auth'
 import { whatsappManager } from '../../../../lib/customer-support'
 import { z } from 'zod'
 

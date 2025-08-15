@@ -1,9 +1,9 @@
 import { NextRequest } from 'next/server'
-import { CartService } from '../lib/services/cart.service'
-import { createSuccessResponse, createCreatedResponse, createNoContentResponse } from '../lib/api/responses'
-import { handleApiError } from '../lib/api/errors'
-import { requireAuth, validateRequestBody, checkRateLimit, getRateLimitIdentifier } from '../lib/api/middleware'
-import { addToCartSchema } from '../lib/api/validation'
+import { CartService } from '../../../lib/services/cart.service'
+import { createSuccessResponse, createCreatedResponse, createNoContentResponse } from '../../../lib/api/responses'
+import { handleApiError } from '../../../lib/api/errors'
+import { requireAuth, validateRequestBody, checkRateLimit, getRateLimitIdentifier } from '../../../lib/api/middleware'
+import { addToCartSchema } from '../../../lib/api/validation'
 
 export async function GET(request: NextRequest) {
   try {

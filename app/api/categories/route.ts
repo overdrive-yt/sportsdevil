@@ -1,9 +1,9 @@
 import { NextRequest } from 'next/server'
-import { CategoryService } from '../lib/services/category.service'
-import { createSuccessResponse, createCreatedResponse } from '../lib/api/responses'
-import { handleApiError } from '../lib/api/errors'
-import { requireAdmin, validateRequestBody, checkRateLimit, getRateLimitIdentifier } from '../lib/api/middleware'
-import { categorySchema } from '../lib/api/validation'
+import { CategoryService } from '../../../lib/services/category.service'
+import { createSuccessResponse, createCreatedResponse } from '../../../lib/api/responses'
+import { handleApiError } from '../../../lib/api/errors'
+import { requireAdmin, validateRequestBody, checkRateLimit, getRateLimitIdentifier } from '../../../lib/api/middleware'
+import { categorySchema } from '../../../lib/api/validation'
 
 export async function GET(request: NextRequest) {
   try {

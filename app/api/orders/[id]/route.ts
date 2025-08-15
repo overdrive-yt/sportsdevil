@@ -1,8 +1,8 @@
 import { NextRequest } from 'next/server'
-import { OrderService } from '../../lib/services/order.service'
-import { createSuccessResponse } from '../../lib/api/responses'
-import { handleApiError } from '../../lib/api/errors'
-import { requireAuth, checkRateLimit, getRateLimitIdentifier } from '../../lib/api/middleware'
+import { OrderService } from '../../../../lib/services/order.service'
+import { createSuccessResponse } from '../../../../lib/api/responses'
+import { handleApiError } from '../../../../lib/api/errors'
+import { requireAuth, checkRateLimit, getRateLimitIdentifier } from '../../../../lib/api/middleware'
 
 interface RouteParams {
   params: Promise<{

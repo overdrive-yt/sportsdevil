@@ -1,8 +1,8 @@
 import { NextRequest } from 'next/server'
-import { getSecurityEvents } from '../../lib/api/middleware'
-import { requireSuperAdmin, checkRateLimit, getRateLimitIdentifier } from '../../lib/api/middleware'
-import { createSuccessResponse } from '../../lib/api/responses'
-import { handleApiError } from '../../lib/api/errors'
+import { getSecurityEvents } from '../../../../lib/api/middleware'
+import { requireSuperAdmin, checkRateLimit, getRateLimitIdentifier } from '../../../../lib/api/middleware'
+import { createSuccessResponse } from '../../../../lib/api/responses'
+import { handleApiError } from '../../../../lib/api/errors'
 
 export async function GET(request: NextRequest) {
   try {
