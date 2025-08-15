@@ -4,7 +4,7 @@ import {
   calculateServicePrice,
   calculateAddOnTotal,
   type SelectedAddOn
-} from '@/lib/add-ons/services'
+} from '../../../../lib/add-ons/services'
 
 export async function POST(request: NextRequest) {
   try {

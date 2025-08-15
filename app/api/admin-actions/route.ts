@@ -1,6 +1,6 @@
 // V9.15: Admin Dashboard Actions API Endpoint
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
+import { prisma } from '../../../lib/prisma'
 
 // POST: Handle various admin dashboard actions
 export async function POST(request: NextRequest) {

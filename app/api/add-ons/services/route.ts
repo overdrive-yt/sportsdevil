@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import {
   getAvailableServicesForProduct,
   ADD_ON_BUNDLES
-} from '@/lib/add-ons/services'
+} from '../../../../lib/add-ons/services'
 
 export async function GET(request: NextRequest) {
   try {
