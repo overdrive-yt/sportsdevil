@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { toast } from '@/components/ui/use-toast'
-import { useUIStore, User } from '@/stores/auth-store'
+import { toast } from '../components/ui/use-toast'
+import { useUIStore, User } from '../stores/auth-store'
 
 interface LoginData {
   email: string

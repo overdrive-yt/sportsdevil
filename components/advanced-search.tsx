@@ -3,12 +3,12 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Search, Clock, Tag, Package, Star, TrendingUp } from 'lucide-react'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { SearchService, SearchSuggestion } from '@/lib/services/search.service'
-import { cn } from '@/lib/utils'
+import { Input } from './ui/input'
+import { Button } from './ui/button'
+import { Badge } from './ui/badge'
+import { ScrollArea } from './ui/scroll-area'
+import { SearchService, SearchSuggestion } from '../lib/services/search.service'
+import { cn } from '../lib/utils'
 
 interface AdvancedSearchProps {
   onSearch?: (query: string) => void

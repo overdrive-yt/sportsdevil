@@ -1,15 +1,15 @@
 import { Suspense } from 'react'
 import { redirect } from 'next/navigation'
 import { getServerSession } from 'next-auth/next'
-import { authOptions } from '@/lib/auth'
-import { prisma } from '@/lib/prisma'
-import { OrderTracking } from '@/components/order-tracking'
-import { Header } from '@/components/header'  
-import { Footer } from '@/components/footer'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Separator } from '@/components/ui/separator'
+import { authOptions } from '../../../lib/auth'
+import { prisma } from '../../../lib/prisma'
+import { OrderTracking } from '../../../components/order-tracking'
+import { Header } from '../../../components/header'  
+import { Footer } from '../../../components/footer'
+import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card'
+import { Button } from '../../../components/ui/button'
+import { Badge } from '../../../components/ui/badge'
+import { Separator } from '../../../components/ui/separator'
 import { 
   CheckCircle, 
   Package, 
@@ -22,7 +22,7 @@ import {
   Phone
 } from 'lucide-react'
 import Link from 'next/link'
-import { formatPriceSimple } from '@/lib/utils'
+import { formatPriceSimple } from '../../../lib/utils'
 
 interface OrderConfirmationPageProps {
   searchParams: Promise<{ order?: string }>

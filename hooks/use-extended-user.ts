@@ -1,7 +1,7 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
-import { useCurrentUser } from '@/hooks/use-auth-store'
+import { useCurrentUser } from './use-auth-store'
 
 interface ExtendedUserProfile {
   user: {

@@ -1,18 +1,18 @@
 "use client"
 
 import { useState, useEffect } from 'react'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Label } from '@/components/ui/label'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { Button } from '../ui/button'
+import { Badge } from '../ui/badge'
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
+import { Label } from '../ui/label'
+import { RadioGroup, RadioGroupItem } from '../ui/radio-group'
 import { 
   Select, 
   SelectContent, 
   SelectItem, 
   SelectTrigger, 
   SelectValue 
-} from '@/components/ui/select'
+} from '../ui/select'
 import { Info, AlertCircle, CheckCircle2 } from 'lucide-react'
 import {
   CRICKET_BAT_GRADES,
@@ -25,7 +25,7 @@ import {
   getAvailableOptions,
   getVariationDescription,
   type CricketBatVariation
-} from '@/lib/variations/cricket-bat-variations'
+} from '../../lib/variations/cricket-bat-variations'
 
 interface CricketBatSelectorProps {
   basePrice: number

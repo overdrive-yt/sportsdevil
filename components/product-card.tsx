@@ -2,12 +2,12 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { Card, CardContent, CardFooter } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
+import { Card, CardContent, CardFooter } from './ui/card'
+import { Button } from './ui/button'
+import { Badge } from './ui/badge'
 import { ShoppingCart, Eye } from 'lucide-react'
-import { useAddToCart } from '@/hooks/use-cart'
-import { WishlistHeartCompact } from '@/components/wishlist-heart'
+import { useAddToCart } from '../hooks/use-cart'
+import { WishlistHeartCompact } from './wishlist-heart'
 
 interface Product {
   id: string

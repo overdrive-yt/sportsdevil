@@ -1,4 +1,4 @@
-import { OrderTracking } from '@/components/order-tracking'
+import { OrderTracking } from '../../components/order-tracking'
 
 export default function TrackOrderPage() {
   return (

@@ -3,19 +3,19 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Badge } from "@/components/ui/badge"
-import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet"
-import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu"
-import { ScrollArea } from "@/components/ui/scroll-area"
+import { Button } from "./ui/button"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu"
+import { Badge } from "./ui/badge"
+import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "./ui/sheet"
+import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "./ui/navigation-menu"
+import { ScrollArea } from "./ui/scroll-area"
 import { ShoppingCart, User, Menu, Search, Heart, LogIn, UserPlus, LogOut, Settings, Package, Minus, Plus } from "lucide-react"
-import { useCartStore } from '@/stores/cart-store'
-import { useCurrentUser, useEnhancedLogout } from '@/hooks/use-auth-store'
-import { useCartSyncStatus } from '@/hooks/use-cart-sync'
-import { ScrollingBanner } from "@/components/scrolling-banner"
-import { WishlistHeaderButton } from "@/components/wishlist-header-button"
-import { formatPriceSimple } from '@/lib/utils'
+import { useCartStore } from '../stores/cart-store'
+import { useCurrentUser, useEnhancedLogout } from '../hooks/use-auth-store'
+import { useCartSyncStatus } from '../hooks/use-cart-sync'
+import { ScrollingBanner } from "./scrolling-banner"
+import { WishlistHeaderButton } from "./wishlist-header-button"
+import { formatPriceSimple } from '../lib/utils'
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)

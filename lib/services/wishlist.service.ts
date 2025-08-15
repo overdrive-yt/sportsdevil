@@ -3,8 +3,8 @@
  * Handles all wishlist operations with authentication requirements
  */
 
-import { prisma } from '@/lib/prisma'
-import { NotFoundError, ValidationError } from '@/lib/api/errors'
+import { prisma } from '../prisma'
+import { NotFoundError, ValidationError } from '../api/errors'
 
 export interface WishlistWithItems {
   id: string

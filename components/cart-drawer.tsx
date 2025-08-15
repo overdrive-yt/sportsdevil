@@ -9,14 +9,14 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from '@/components/ui/sheet'
-import { Button } from '@/components/ui/button'
-import { Separator } from '@/components/ui/separator'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { Badge } from '@/components/ui/badge'
+} from './ui/sheet'
+import { Button } from './ui/button'
+import { Separator } from './ui/separator'
+import { ScrollArea } from './ui/scroll-area'
+import { Badge } from './ui/badge'
 import { ShoppingCart, Plus, Minus, X } from 'lucide-react'
-import { useCartStore } from '@/stores/cart-store'
-import { formatPriceSimple } from '@/lib/utils'
+import { useCartStore } from '../stores/cart-store'
+import { formatPriceSimple } from '../lib/utils'
 
 interface CartDrawerProps {
   children?: React.ReactNode

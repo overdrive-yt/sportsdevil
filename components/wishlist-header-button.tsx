@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import { Heart } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { useCurrentUser } from '@/hooks/use-auth-store'
+import { Button } from './ui/button'
+import { Badge } from './ui/badge'
+import { useCurrentUser } from '../hooks/use-auth-store'
 import Link from 'next/link'
 
 export function WishlistHeaderButton() {

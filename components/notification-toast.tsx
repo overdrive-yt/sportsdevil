@@ -1,8 +1,8 @@
 "use client"
 
-import { useNotifications } from '@/contexts/notification-context'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { Button } from '@/components/ui/button'
+import { useNotifications } from '../contexts/notification-context'
+import { Alert, AlertDescription, AlertTitle } from './ui/alert'
+import { Button } from './ui/button'
 import { X, CheckCircle, AlertCircle, AlertTriangle, Info } from 'lucide-react'
 
 const iconMap = {

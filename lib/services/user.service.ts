@@ -1,5 +1,5 @@
-import { prisma } from '@/lib/prisma'
-import { NotFoundError, ValidationError, ConflictError } from '@/lib/api/errors'
+import { prisma } from '../prisma'
+import { NotFoundError, ValidationError, ConflictError } from '../api/errors'
 import bcrypt from 'bcryptjs'
 
 export interface UserProfileData {

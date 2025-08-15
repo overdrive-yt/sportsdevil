@@ -21,10 +21,10 @@ import {
   CreditCard,
   Ticket
 } from 'lucide-react'
-import { EnhancedCard } from '@/components/ui/enhanced-card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { ScrollArea } from '@/components/ui/scroll-area'
+import { EnhancedCard } from '../ui/enhanced-card'
+import { Badge } from '../ui/badge'
+import { Button } from '../ui/button'
+import { ScrollArea } from '../ui/scroll-area'
 
 interface Notification {
   id: string

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { apiClient } from '@/lib/api-client'
+import { apiClient } from '../lib/api-client'
 
 export function useCategories(includeInactive = false, hierarchy = false) {
   return useQuery({

@@ -2,7 +2,7 @@
  * Script to test email configuration and order confirmation functionality
  */
 
-const { EmailService } = require('@/lib/email')
+const { EmailService } = require('../lib/email')
 
 async function testEmailSetup() {
   console.log('🧪 Testing email setup...')

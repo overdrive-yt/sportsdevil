@@ -1,7 +1,7 @@
 'use client'
 
 import { ReactNode } from 'react'
-import { useCartSync } from '@/hooks/use-cart-sync'
+import { useCartSync } from '../hooks/use-cart-sync'
 
 interface CartSyncProviderProps {
   children: ReactNode

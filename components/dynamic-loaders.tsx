@@ -1,8 +1,8 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { Skeleton } from '@/components/ui/skeleton'
-import { Card } from '@/components/ui/card'
+import { Skeleton } from './ui/skeleton'
+import { Card } from './ui/card'
 
 // Loading components for better UX
 const AdminLoadingFallback = () => (
@@ -44,7 +44,7 @@ const ChartLoadingFallback = () => (
 
 // Dynamic imports for heavy admin components
 export const DynamicAdminDashboard = dynamic(
-  () => import('@/components/admin/simple-dashboard').then(mod => ({ default: mod.SimpleDashboard })),
+  () => import('./admin/simple-dashboard').then(mod => ({ default: mod.SimpleDashboard })),
   {
     loading: AdminLoadingFallback,
     ssr: false, // Disable SSR for admin components
@@ -52,7 +52,7 @@ export const DynamicAdminDashboard = dynamic(
 )
 
 export const DynamicAdvancedAnalytics = dynamic(
-  () => import('@/components/admin/advanced-analytics-dashboard').then(mod => ({ default: mod.AdvancedAnalyticsDashboard })),
+  () => import('./admin/advanced-analytics-dashboard').then(mod => ({ default: mod.AdvancedAnalyticsDashboard })),
   {
     loading: AdminLoadingFallback,
     ssr: false,
@@ -60,7 +60,7 @@ export const DynamicAdvancedAnalytics = dynamic(
 )
 
 export const DynamicIntegrationsDashboard = dynamic(
-  () => import('@/components/admin/integrations-dashboard'),
+  () => import('./admin/integrations-dashboard'),
   {
     loading: IntegrationLoadingFallback,
     ssr: false,
@@ -68,7 +68,7 @@ export const DynamicIntegrationsDashboard = dynamic(
 )
 
 export const DynamicRevenueChart = dynamic(
-  () => import('@/components/admin/revenue-chart'),
+  () => import('./admin/revenue-chart'),
   {
     loading: ChartLoadingFallback,
     ssr: false,
@@ -76,7 +76,7 @@ export const DynamicRevenueChart = dynamic(
 )
 
 export const DynamicSystemHealthMonitor = dynamic(
-  () => import('@/components/admin/system-health-monitor').then(mod => ({ default: mod.SystemHealthMonitor })),
+  () => import('./admin/system-health-monitor').then(mod => ({ default: mod.SystemHealthMonitor })),
   {
     loading: () => <Skeleton className="h-32 w-full" />,
     ssr: false,
@@ -85,7 +85,7 @@ export const DynamicSystemHealthMonitor = dynamic(
 
 // Dynamic imports for heavy payment components
 export const DynamicStripePaymentForm = dynamic(
-  () => import('@/components/checkout/stripe-payment-form').then(mod => ({ default: mod.StripePaymentForm })),
+  () => import('./checkout/stripe-payment-form').then(mod => ({ default: mod.StripePaymentForm })),
   {
     loading: () => (
       <Card className="p-6">
@@ -120,7 +120,7 @@ export const DynamicBarChart = dynamic(
 
 // Dynamic import for notification system
 export const DynamicNotificationsCenter = dynamic(
-  () => import('@/components/admin/notifications-center').then(mod => ({ default: mod.NotificationsCenter })),
+  () => import('./admin/notifications-center').then(mod => ({ default: mod.NotificationsCenter })),
   {
     loading: () => <Skeleton className="h-48 w-full" />,
     ssr: false,
@@ -129,7 +129,7 @@ export const DynamicNotificationsCenter = dynamic(
 
 // Dynamic import for product wizard (heavy form component)
 export const DynamicProductWizard = dynamic(
-  () => import('@/components/admin/product-wizard').then(mod => ({ default: mod.ProductWizard })),
+  () => import('./admin/product-wizard').then(mod => ({ default: mod.ProductWizard })),
   {
     loading: () => (
       <div className="space-y-6">
@@ -147,7 +147,7 @@ export const DynamicProductWizard = dynamic(
 
 // Dynamic import for social media manager (with external API calls)
 export const DynamicSocialMediaManager = dynamic(
-  () => import('@/components/admin/social-media-manager').then(mod => ({ default: mod.SocialMediaManager })),
+  () => import('./admin/social-media-manager').then(mod => ({ default: mod.SocialMediaManager })),
   {
     loading: () => <Skeleton className="h-64 w-full" />,
     ssr: false,

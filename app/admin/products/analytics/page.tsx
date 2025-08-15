@@ -1,17 +1,17 @@
 import { Suspense } from 'react'
 import { Metadata } from 'next'
 import { getServerSession } from 'next-auth/next'
-import { authOptions } from '@/lib/auth'
+import { authOptions } from '../../../../lib/auth'
 import { redirect } from 'next/navigation'
-import { prisma } from '@/lib/prisma'
+import { prisma } from '../../../../lib/prisma'
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Progress } from '@/components/ui/progress'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Alert, AlertDescription } from '@/components/ui/alert'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../../components/ui/card'
+import { Badge } from '../../../../components/ui/badge'
+import { Button } from '../../../../components/ui/button'
+import { Progress } from '../../../../components/ui/progress'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../../../components/ui/select'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../../components/ui/tabs'
+import { Alert, AlertDescription } from '../../../../components/ui/alert'
 
 import {
   TrendingUp,
@@ -32,7 +32,7 @@ import {
   AlertTriangle
 } from 'lucide-react'
 import Link from 'next/link'
-import { formatPriceSimple } from '@/lib/utils'
+import { formatPriceSimple } from '../../../../lib/utils'
 
 export const metadata: Metadata = {
   title: 'Product Performance Analytics | Sports Devil Cricket Admin',

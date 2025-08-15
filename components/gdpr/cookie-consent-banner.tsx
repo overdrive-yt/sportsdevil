@@ -1,15 +1,15 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Switch } from '@/components/ui/switch'
-import { Label } from '@/components/ui/label'
-import { Separator } from '@/components/ui/separator'
-import { Badge } from '@/components/ui/badge'
+import { Button } from '../ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
+import { Switch } from '../ui/switch'
+import { Label } from '../ui/label'
+import { Separator } from '../ui/separator'
+import { Badge } from '../ui/badge'
 import { X, Settings, Shield, Info, Cookie } from 'lucide-react'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog'
-import { COOKIE_DEFINITIONS, CookieCategory, GDPRConsent } from '@/lib/gdpr'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '../ui/dialog'
+import { COOKIE_DEFINITIONS, CookieCategory, GDPRConsent } from '../../lib/gdpr'
 import { useRouter } from 'next/navigation'
 
 interface CookieConsentBannerProps {

@@ -7,8 +7,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { Label } from '@/components/ui/label'
+} from './ui/select'
+import { Label } from './ui/label'
 
 const sortOptions = [
   { value: 'newest', label: 'Newest First' },

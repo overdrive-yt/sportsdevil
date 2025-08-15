@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
+import { Button } from "./ui/button"
+import { Carousel, CarouselContent, CarouselItem } from "./ui/carousel"
 import { MapPin } from "lucide-react"
 
 const sportSlides = [

@@ -1,10 +1,10 @@
 'use client'
 
 import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { Skeleton } from '@/components/ui/skeleton'
-import { ProductCard } from '@/components/product-card'
-import { useNewProducts } from '@/hooks/use-products'
+import { Button } from './ui/button'
+import { Skeleton } from './ui/skeleton'
+import { ProductCard } from './product-card'
+import { useNewProducts } from '../hooks/use-products'
 import { ArrowRight } from 'lucide-react'
 
 export function NewArrivalsSection() {

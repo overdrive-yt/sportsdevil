@@ -1,7 +1,7 @@
 // 🗑️ TEMPORARY FILE - DELETE AFTER MIGRATION
 // Database Migration Service for WooCommerce Import
 
-import { prisma } from '@/lib/prisma'
+import { prisma } from '../prisma'
 import { WooCommerceProduct, WooCommerceCategory, WooCommerceTransformer } from './woocommerce-api'
 import { ImageDownloader } from './image-downloader'
 

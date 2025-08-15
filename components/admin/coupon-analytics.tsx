@@ -1,14 +1,14 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Badge } from '@/components/ui/badge'
-import { Calendar } from '@/components/ui/calendar'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { Progress } from '@/components/ui/progress'
-import { cn } from '@/lib/utils'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui/card'
+import { Button } from '../ui/button'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
+import { Badge } from '../ui/badge'
+import { Calendar } from '../ui/calendar'
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
+import { Progress } from '../ui/progress'
+import { cn } from '../../lib/utils'
 import { format } from 'date-fns'
 import { 
   Calendar as CalendarIcon,
@@ -26,7 +26,7 @@ import {
   Download,
   Loader2
 } from 'lucide-react'
-import { formatPriceSimple } from '@/lib/utils'
+import { formatPriceSimple } from '../../lib/utils'
 
 // V9.11.2: Coupon Analytics Dashboard
 export function CouponAnalytics() {

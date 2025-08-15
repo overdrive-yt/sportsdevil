@@ -23,20 +23,20 @@ import {
   Download,
   Share
 } from 'lucide-react'
-import { EnhancedCard } from '@/components/ui/enhanced-card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { EnhancedCard } from '../ui/enhanced-card'
+import { Badge } from '../ui/badge'
+import { Button } from '../ui/button'
+import { Input } from '../ui/input'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-import { Switch } from '@/components/ui/switch'
-import { Separator } from '@/components/ui/separator'
+} from '../ui/dropdown-menu'
+import { Switch } from '../ui/switch'
+import { Separator } from '../ui/separator'
 
 interface Notification {
   id: string

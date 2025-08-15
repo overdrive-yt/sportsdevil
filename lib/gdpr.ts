@@ -3,7 +3,7 @@
  * Handles data privacy, cookie consent, and user data rights
  */
 
-import { prisma } from '@/lib/prisma'
+import { prisma } from './prisma'
 
 // Cookie categories for granular consent
 export enum CookieCategory {

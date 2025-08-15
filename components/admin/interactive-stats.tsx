@@ -15,12 +15,12 @@ import {
   CheckCircle,
   Clock
 } from 'lucide-react'
-import { EnhancedCard } from '@/components/ui/enhanced-card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { CouponOverviewTile } from '@/components/admin/coupon-overview-tile'
-import { NotificationsCenter } from '@/components/admin/notifications-center'
-import { IntegrationStatusPanel } from '@/components/admin/integration-status-panel'
+import { EnhancedCard } from '../ui/enhanced-card'
+import { Badge } from '../ui/badge'
+import { Button } from '../ui/button'
+import { CouponOverviewTile } from './coupon-overview-tile'
+import { NotificationsCenter } from './notifications-center'
+import { IntegrationStatusPanel } from './integration-status-panel'
 
 interface StatCard {
   id: string

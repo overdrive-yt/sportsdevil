@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 import { WishlistContent } from './wishlist-content'
-import { Skeleton } from '@/components/ui/skeleton'
+import { Skeleton } from '../../../components/ui/skeleton'
 
 function WishlistSkeleton() {
   return (

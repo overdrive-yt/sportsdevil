@@ -1,12 +1,12 @@
 "use client"
 
 import { useRef } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
+import { Card, CardContent } from "./ui/card"
+import { Button } from "./ui/button"
+import { Badge } from "./ui/badge"
 import { ChevronLeft, ChevronRight, Star, ShoppingCart } from "lucide-react"
-import { useAddToCart } from "@/hooks/use-cart"
-import { toast } from "@/hooks/use-toast"
+import { useAddToCart } from "../hooks/use-cart"
+import { toast } from "../hooks/use-toast"
 
 const newProducts = [
   {

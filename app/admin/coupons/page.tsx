@@ -2,13 +2,13 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Input } from '@/components/ui/input'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Checkbox } from '@/components/ui/checkbox'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../../../components/ui/card'
+import { Button } from '../../../components/ui/button'
+import { Badge } from '../../../components/ui/badge'
+import { Input } from '../../../components/ui/input'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../../components/ui/select'
+import { Checkbox } from '../../../components/ui/checkbox'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../components/ui/tabs'
 import {
   Table,
   TableBody,
@@ -16,13 +16,13 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table'
+} from '../../../components/ui/table'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+} from '../../../components/ui/dropdown-menu'
 import { 
   Plus,
   Search,
@@ -42,13 +42,13 @@ import {
   AlertCircle,
   Download
 } from 'lucide-react'
-import { Header } from '@/components/header'
-import { Footer } from '@/components/footer'
-import { useCurrentUser } from '@/hooks/use-auth-store'
-import { useToast } from '@/hooks/use-toast'
-import { formatPriceSimple } from '@/lib/utils'
-import { CouponForm } from '@/components/admin/coupon-form'
-import { CouponAnalytics } from '@/components/admin/coupon-analytics'
+import { Header } from '../../../components/header'
+import { Footer } from '../../../components/footer'
+import { useCurrentUser } from '../../../hooks/use-auth-store'
+import { useToast } from '../../../hooks/use-toast'
+import { formatPriceSimple } from '../../../lib/utils'
+import { CouponForm } from '../../../components/admin/coupon-form'
+import { CouponAnalytics } from '../../../components/admin/coupon-analytics'
 
 // V9.11.2: Advanced Coupon Management Interface
 export default function CouponsPage() {

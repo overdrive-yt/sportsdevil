@@ -1,17 +1,17 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useCurrentUser } from '@/hooks/use-auth-store'
-import { WishlistHeart } from '@/components/wishlist-heart'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Card, CardContent } from '@/components/ui/card'
+import { useCurrentUser } from '../../../hooks/use-auth-store'
+import { WishlistHeart } from '../../../components/wishlist-heart'
+import { Button } from '../../../components/ui/button'
+import { Badge } from '../../../components/ui/badge'
+import { Card, CardContent } from '../../../components/ui/card'
 import { Heart, ShoppingCart, Trash2, Package, Star } from 'lucide-react'
 import { toast } from 'sonner'
 import Link from 'next/link'
 import Image from 'next/image'
-import { formatPriceSimple } from '@/lib/utils'
-import { WishlistWithItems, WishlistItemWithProduct } from '@/lib/services/wishlist.service'
+import { formatPriceSimple } from '../../../lib/utils'
+import { WishlistWithItems, WishlistItemWithProduct } from '../../../lib/services/wishlist.service'
 
 export function WishlistContent() {
   const { user, isAuthenticated } = useCurrentUser()

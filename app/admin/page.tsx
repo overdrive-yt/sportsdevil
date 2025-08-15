@@ -2,8 +2,8 @@
 'use client'
 
 import { useState } from 'react'
-import { RoleBasedAdminLayout } from '@/components/layouts/role-based-admin-layout'
-import { DashboardToggle } from '@/components/admin/dashboard-toggle'
+import { RoleBasedAdminLayout } from '../../components/layouts/role-based-admin-layout'
+import { DashboardToggle } from '../../components/admin/dashboard-toggle'
 // Dynamically imported heavy components for better performance
 import { 
   DynamicAdminDashboard,
@@ -12,17 +12,17 @@ import {
   DynamicSystemHealthMonitor,
   DynamicSocialMediaManager,
   DynamicNotificationsCenter
-} from '@/components/dynamic-loaders'
+} from '../../components/dynamic-loaders'
 // Keep light components as regular imports
-import { InteractiveStats } from '@/components/admin/interactive-stats'
-import { EnhancedSettingsPanel } from '@/components/admin/enhanced-settings-panel'
-import { DashboardOptimization } from '@/components/admin/dashboard-optimization'
-import { StripeDashboard } from '@/components/admin/stripe-dashboard'
-import { Header } from '@/components/header'
-import { Footer } from '@/components/footer'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
+import { InteractiveStats } from '../../components/admin/interactive-stats'
+import { EnhancedSettingsPanel } from '../../components/admin/enhanced-settings-panel'
+import { DashboardOptimization } from '../../components/admin/dashboard-optimization'
+import { StripeDashboard } from '../../components/admin/stripe-dashboard'
+import { Header } from '../../components/header'
+import { Footer } from '../../components/footer'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs'
+import { Badge } from '../../components/ui/badge'
+import { Button } from '../../components/ui/button'
 import { 
   BarChart3, 
   Bell, 

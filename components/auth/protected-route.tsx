@@ -2,10 +2,10 @@
 
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card'
+import { Button } from '../ui/button'
 import { Loader2, Shield, Lock } from 'lucide-react'
-import { useCurrentUser } from '@/hooks/use-auth-store'
+import { useCurrentUser } from '../../hooks/use-auth-store'
 import Link from 'next/link'
 
 interface ProtectedRouteProps {

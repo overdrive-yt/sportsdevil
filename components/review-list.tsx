@@ -2,15 +2,15 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Separator } from '@/components/ui/separator'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Button } from './ui/button'
+import { Card, CardContent } from './ui/card'
+import { Badge } from './ui/badge'
+import { Separator } from './ui/separator'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
+import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { Star, ThumbsUp, ThumbsDown, Verified, ChevronDown, ChevronUp } from 'lucide-react'
-import { useReviews } from '@/hooks/use-reviews'
-import { ReviewStats } from '@/components/review-stats'
+import { useReviews } from '../hooks/use-reviews'
+import { ReviewStats } from './review-stats'
 import { formatDistanceToNow } from 'date-fns'
 
 interface ReviewListProps {

@@ -1,8 +1,8 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Card, CardContent } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
+import { Card, CardContent } from '../ui/card'
+import { Badge } from '../ui/badge'
 import { Activity, ShoppingCart, Users, Eye } from 'lucide-react'
 
 // V9.11.4: Real-Time Stats Component

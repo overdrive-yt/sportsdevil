@@ -1,4 +1,4 @@
-import { Card, CardContent } from "@/components/ui/card"
+import { Card, CardContent } from "./ui/card"
 import { Star, CheckCircle, RefreshCw } from "lucide-react"
 import { memo } from "react"
 

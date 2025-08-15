@@ -1,10 +1,10 @@
 "use client"
 
 import { useState, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Separator } from '@/components/ui/separator'
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
+import { Badge } from '../ui/badge'
+import { Button } from '../ui/button'
+import { Separator } from '../ui/separator'
 import { 
   Calculator, 
   Clock, 
@@ -18,7 +18,7 @@ import {
   calculateAddOnTotal,
   getServiceDescription,
   type SelectedAddOn
-} from '@/lib/add-ons/services'
+} from '../../lib/add-ons/services'
 
 interface PriceCalculatorProps {
   basePrice: number

@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from 'react'
 import { Heart } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { useCurrentUser } from '@/hooks/use-auth-store'
+import { Button } from './ui/button'
+import { useCurrentUser } from '../hooks/use-auth-store'
 import { toast } from 'sonner'
-import { cn } from '@/lib/utils'
+import { cn } from '../lib/utils'
 
 interface WishlistHeartProps {
   productId: string

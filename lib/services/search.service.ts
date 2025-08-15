@@ -3,7 +3,7 @@
  * Provides intelligent search suggestions and history management
  */
 
-import { prisma } from '@/lib/prisma'
+import { prisma } from '../prisma'
 
 export interface SearchSuggestion {
   id: string

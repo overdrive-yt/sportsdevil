@@ -26,14 +26,14 @@ import {
   Shield,
   Gauge
 } from 'lucide-react'
-import { EnhancedCard } from '@/components/ui/enhanced-card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Progress } from '@/components/ui/progress'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Switch } from '@/components/ui/switch'
-import { Label } from '@/components/ui/label'
-import { Slider } from '@/components/ui/slider'
+import { EnhancedCard } from '../ui/enhanced-card'
+import { Badge } from '../ui/badge'
+import { Button } from '../ui/button'
+import { Progress } from '../ui/progress'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
+import { Switch } from '../ui/switch'
+import { Label } from '../ui/label'
+import { Slider } from '../ui/slider'
 
 interface PerformanceMetric {
   id: string

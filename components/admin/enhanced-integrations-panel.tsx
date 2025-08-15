@@ -23,19 +23,19 @@ import {
   ExternalLink,
   Download
 } from 'lucide-react'
-import { EnhancedCard } from '@/components/ui/enhanced-card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Progress } from '@/components/ui/progress'
-import { Switch } from '@/components/ui/switch'
+import { EnhancedCard } from '../ui/enhanced-card'
+import { Badge } from '../ui/badge'
+import { Button } from '../ui/button'
+import { Progress } from '../ui/progress'
+import { Switch } from '../ui/switch'
 import { 
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+} from '../ui/dropdown-menu'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
 
 interface Integration {
   id: string

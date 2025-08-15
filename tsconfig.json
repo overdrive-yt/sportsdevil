@@ -14,7 +14,6 @@
     "jsx": "preserve",
     "jsxImportSource": "react",
     "incremental": true,
-    "baseUrl": ".",
     // Compilation optimizations for better stability
     // Better type checking performance
     "skipDefaultLibCheck": true,
@@ -26,15 +25,7 @@
       {
         "name": "next"
       }
-    ],
-    "paths": {
-      "@/*": ["./*"],
-      "@/lib/*": ["./lib/*"],
-      "@/components/*": ["./components/*"],
-      "@/app/*": ["./app/*"],
-      "@/hooks/*": ["./hooks/*"],
-      "@/stores/*": ["./stores/*"]
-    }
+    ]
   },
   "include": [
     "next-env.d.ts", 

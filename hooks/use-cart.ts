@@ -1,8 +1,8 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { useCurrentUser } from '@/hooks/use-auth-store'
-import { apiClient } from '@/lib/api-client'
-import { useCartStore } from '@/stores/cart-store'
-import { toast } from '@/hooks/use-toast'
+import { useCurrentUser } from './use-auth-store'
+import { apiClient } from '../lib/api-client'
+import { useCartStore } from '../stores/cart-store'
+import { toast } from './use-toast'
 
 export function useCart() {
   const { user, isAuthenticated } = useCurrentUser()

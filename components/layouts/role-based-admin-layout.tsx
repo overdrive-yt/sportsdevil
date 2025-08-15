@@ -20,18 +20,18 @@ import {
   Home,
   AlertTriangle
 } from 'lucide-react'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Separator } from '@/components/ui/separator'
+import { Badge } from '../ui/badge'
+import { Button } from '../ui/button'
+import { Separator } from '../ui/separator'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-import { Avatar, AvatarFallback } from '@/components/ui/avatar'
-import { RBACService, Role, useRBAC } from '@/lib/rbac'
+} from '../ui/dropdown-menu'
+import { Avatar, AvatarFallback } from '../ui/avatar'
+import { RBACService, Role, useRBAC } from '../../lib/rbac'
 
 interface RoleBasedAdminLayoutProps {
   children: React.ReactNode

@@ -1,9 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { Button } from '@/components/ui/button'
+import { Button } from './ui/button'
 import { MessageCircle, X } from 'lucide-react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 
 export function WhatsAppFloat() {
   const [isOpen, setIsOpen] = useState(false)

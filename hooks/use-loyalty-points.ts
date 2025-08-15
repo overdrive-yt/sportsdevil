@@ -2,8 +2,8 @@
 
 import { useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { toast } from '@/hooks/use-toast'
-import { authenticatedFetch, handleAuthResponse } from '@/lib/client-auth'
+import { toast } from './use-toast'
+import { authenticatedFetch, handleAuthResponse } from '../lib/client-auth'
 
 interface LoyaltyBalance {
   loyaltyPoints: number

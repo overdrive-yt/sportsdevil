@@ -3,10 +3,10 @@
 import { useState, useEffect, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/navigation'
-import { Dialog, DialogContent } from '@/components/ui/dialog'
-import { Input } from '@/components/ui/input'
-import { Badge } from '@/components/ui/badge'
-import { ScrollArea } from '@/components/ui/scroll-area'
+import { Dialog, DialogContent } from './dialog'
+import { Input } from './input'
+import { Badge } from './badge'
+import { ScrollArea } from './scroll-area'
 import { 
   Search, 
   Command,

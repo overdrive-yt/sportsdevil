@@ -2,14 +2,14 @@
 
 import { useState, useEffect, useCallback, useMemo } from 'react'
 import { useRouter, useSearchParams, usePathname } from 'next/navigation'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Checkbox } from '@/components/ui/checkbox'
-import { Label } from '@/components/ui/label'
-import { Slider } from '@/components/ui/slider'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Separator } from '@/components/ui/separator'
-import { Badge } from '@/components/ui/badge'
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
+import { Checkbox } from './ui/checkbox'
+import { Label } from './ui/label'
+import { Slider } from './ui/slider'
+import { Button } from './ui/button'
+import { Input } from './ui/input'
+import { Separator } from './ui/separator'
+import { Badge } from './ui/badge'
 import { 
   Sheet, 
   SheetContent, 
@@ -17,15 +17,15 @@ import {
   SheetHeader, 
   SheetTitle, 
   SheetTrigger 
-} from '@/components/ui/sheet'
+} from './ui/sheet'
 import { 
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from '@/components/ui/collapsible'
+} from './ui/collapsible'
 import { X, Filter, Search, ChevronDown, ChevronUp, Star, Package, Tag } from 'lucide-react'
-import { useCategories } from '@/hooks/use-categories'
-import { formatPriceSimple } from '@/lib/utils'
+import { useCategories } from '../hooks/use-categories'
+import { formatPriceSimple } from '../lib/utils'
 
 interface ProductFiltersProps {
   onFiltersChange?: (filters: any) => void

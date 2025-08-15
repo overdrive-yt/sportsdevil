@@ -6,7 +6,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createHash, randomBytes } from 'crypto'
 import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
+import { authOptions } from './auth'
 
 // CSRF token store (in production, use Redis or database)
 const tokenStore = new Map<string, { token: string, expires: number }>()

@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server'
 import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
+import { authOptions } from '../auth'
 import { UnauthorizedError, ForbiddenError, ValidationError } from './errors'
 import { ZodSchema } from 'zod'
 

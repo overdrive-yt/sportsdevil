@@ -4,11 +4,11 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Settings, BarChart3, Users, Activity, Zap, Home } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Separator } from '@/components/ui/separator'
-import { Role } from '@/lib/rbac'
+import { Button } from '../ui/button'
+import { Badge } from '../ui/badge'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card'
+import { Separator } from '../ui/separator'
+import { Role } from '../../lib/rbac'
 
 interface DashboardToggleProps {
   userRole: Role

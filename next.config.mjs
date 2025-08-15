@@ -18,17 +18,7 @@ const nextConfig = {
     },
     // Optimize resolution with priority order
     resolveExtensions: ['.tsx', '.ts', '.jsx', '.js', '.mjs', '.json'],
-    // Ultra-fast resolution optimization
-    resolveAlias: {
-      '@': __dirname,
-      '@/components': join(__dirname, 'components'),
-      '@/lib': join(__dirname, 'lib'),
-      '@/hooks': join(__dirname, 'hooks'),
-      // Explicit problematic imports for Turbopack
-      '@/lib/add-ons/services': join(__dirname, 'lib/add-ons/services.ts'),
-      '@/lib/prisma': join(__dirname, 'lib/prisma.ts'),
-      '@/lib/auth': join(__dirname, 'lib/auth.ts'),
-    },
+    // Ultra-fast resolution optimization - @/ aliases removed for Vercel compatibility
   },
 
   // Ultra-Performance Optimizations for sub-5s compilation
@@ -134,19 +124,9 @@ const nextConfig = {
         // Enhanced module resolution cache
         cacheWithContext: false,
         cache: true, // Enable resolution caching
-        // Optimize alias resolution with frequently used paths
+        // Alias configuration removed - using relative imports for Vercel compatibility
         alias: {
           ...config.resolve.alias,
-          '@': __dirname,
-          '@/components': join(__dirname, 'components'),
-          '@/lib': join(__dirname, 'lib'),
-          '@/hooks': join(__dirname, 'hooks'),
-          '@/stores': join(__dirname, 'stores'),
-          '@/app': join(__dirname, 'app'),
-          // Explicit problematic imports
-          '@/lib/add-ons/services': join(__dirname, 'lib/add-ons/services.ts'),
-          '@/lib/prisma': join(__dirname, 'lib/prisma.ts'),
-          '@/lib/auth': join(__dirname, 'lib/auth.ts'),
         },
         // Optimize module resolution order
         mainFields: ['browser', 'module', 'main'],

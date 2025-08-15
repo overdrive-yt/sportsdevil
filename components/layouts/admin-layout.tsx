@@ -3,14 +3,14 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { cn } from '@/lib/utils'
-import { AdvancedSidebar } from '@/components/ui/advanced-sidebar'
-import { FuzzySearch, useFuzzySearch } from '@/components/ui/fuzzy-search'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { useCurrentUser, useEnhancedLogout } from '@/hooks/use-auth-store'
+import { cn } from '../../lib/utils'
+import { AdvancedSidebar } from '../ui/advanced-sidebar'
+import { FuzzySearch, useFuzzySearch } from '../ui/fuzzy-search'
+import { Button } from '../ui/button'
+import { Badge } from '../ui/badge'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu'
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
+import { useCurrentUser, useEnhancedLogout } from '../../hooks/use-auth-store'
 import { 
   Bell, 
   Settings, 

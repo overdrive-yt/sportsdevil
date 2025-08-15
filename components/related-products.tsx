@@ -1,10 +1,10 @@
 'use client'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Skeleton } from '@/components/ui/skeleton'
-import { ProductCard } from '@/components/product-card'
-import { useRelatedProducts } from '@/hooks/use-recommendations'
-import { formatPriceSimple } from '@/lib/utils'
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
+import { Skeleton } from './ui/skeleton'
+import { ProductCard } from './product-card'
+import { useRelatedProducts } from '../hooks/use-recommendations'
+import { formatPriceSimple } from '../lib/utils'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 

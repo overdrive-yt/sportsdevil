@@ -2,11 +2,11 @@
 
 import { forwardRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { cn } from '@/lib/utils'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Skeleton } from '@/components/ui/skeleton'
-import { Button } from '@/components/ui/button'
+import { cn } from '../../lib/utils'
+import { Card, CardContent, CardHeader, CardTitle } from './card'
+import { Badge } from './badge'
+import { Skeleton } from './skeleton'
+import { Button } from './button'
 import { ArrowUpRight, TrendingUp, TrendingDown, Minus } from 'lucide-react'
 import Link from 'next/link'
 

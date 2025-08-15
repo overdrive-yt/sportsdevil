@@ -1,5 +1,5 @@
-import { prisma } from '@/lib/prisma'
-import { EmailService } from '@/lib/email'
+import { prisma } from '../prisma'
+import { EmailService } from '../email'
 
 export interface OrderNotificationData {
   orderId: string

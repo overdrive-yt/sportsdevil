@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { useCurrentUser } from '@/hooks/use-auth-store'
+import { useCurrentUser } from '../../hooks/use-auth-store'
 import {
   Elements,
   PaymentElement,
@@ -10,16 +10,16 @@ import {
   useStripe,
   useElements,
 } from '@stripe/react-stripe-js'
-import { getStripe } from '@/lib/stripe-client'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { getStripe } from '../../lib/stripe-client'
+import { Button } from '../ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
+import { Alert, AlertDescription } from '../ui/alert'
+import { Input } from '../ui/input'
+import { Label } from '../ui/label'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
 import { Loader2, Shield, CreditCard, Smartphone, Wallet } from 'lucide-react'
 import { toast } from 'sonner'
-import { useCartStore } from '@/stores/cart-store'
+import { useCartStore } from '../../stores/cart-store'
 
 interface CartItem {
   productId: string

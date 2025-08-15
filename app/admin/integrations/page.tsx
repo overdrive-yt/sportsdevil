@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { Header } from '@/components/header'
-import { Footer } from '@/components/footer'
-import { useCurrentUser } from '@/hooks/use-auth-store'
-import IntegrationsDashboard from '@/components/admin/integrations-dashboard'
+import { Header } from '../../../components/header'
+import { Footer } from '../../../components/footer'
+import { useCurrentUser } from '../../../hooks/use-auth-store'
+import IntegrationsDashboard from '../../../components/admin/integrations-dashboard'
 import { Loader2 } from 'lucide-react'
 
 // V9.11.5: Revolutionary External Integrations Dashboard Page

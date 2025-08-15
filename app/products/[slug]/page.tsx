@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { Header } from '@/components/header'
-import { Footer } from '@/components/footer'
-import { ProductClient } from '@/components/product-client'
-import { ProductStructuredData } from '@/components/seo/structured-data'
-import { ProductBreadcrumb } from '@/components/seo/breadcrumb'
-import { apiClient } from '@/lib/api-client'
+import { Header } from '../../../components/header'
+import { Footer } from '../../../components/footer'
+import { ProductClient } from '../../../components/product-client'
+import { ProductStructuredData } from '../../../components/seo/structured-data'
+import { ProductBreadcrumb } from '../../../components/seo/breadcrumb'
+import { apiClient } from '../../../lib/api-client'
 
 // Environment-aware base URL helper
 const getBaseUrl = () => {

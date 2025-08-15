@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { InstagramSection } from "@/components/instagram"
+import { InstagramSection } from "../../components/instagram"
 
 export default function TestIntegrationsPage() {
   const [googleReviewsStatus, setGoogleReviewsStatus] = useState('loading')

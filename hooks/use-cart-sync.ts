@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
-import { useCurrentUser } from '@/hooks/use-auth-store'
-import { useCartStore } from '@/stores/cart-store'
+import { useCurrentUser } from './use-auth-store'
+import { useCartStore } from '../stores/cart-store'
 import { toast } from 'sonner'
 
 /**

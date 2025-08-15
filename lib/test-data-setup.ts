@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/prisma'
+import { prisma } from './prisma'
 
 /**
  * Enhanced test data setup for Version 9.4.2 live verification

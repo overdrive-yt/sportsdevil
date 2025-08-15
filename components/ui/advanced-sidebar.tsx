@@ -4,11 +4,11 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { Separator } from '@/components/ui/separator'
+import { cn } from '../../lib/utils'
+import { Button } from './button'
+import { Badge } from './badge'
+import { ScrollArea } from './scroll-area'
+import { Separator } from './separator'
 import { 
   BarChart3, 
   Package, 

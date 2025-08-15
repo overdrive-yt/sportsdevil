@@ -2,10 +2,10 @@
 
 import { useState } from 'react'
 import { Search } from 'lucide-react'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
+import { Input } from './ui/input'
+import { Button } from './ui/button'
 import { useRouter } from 'next/navigation'
-import { useSearchStore } from '@/stores/search-store'
+import { useSearchStore } from '../stores/search-store'
 
 export function SearchBar() {
   const [searchTerm, setSearchTerm] = useState('')

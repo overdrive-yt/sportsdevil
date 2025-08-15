@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 import { Suspense } from 'react'
-import { Header } from '@/components/header'
-import { Footer } from '@/components/footer'
-import { ProductsClient } from '@/components/products-client'
-import { Skeleton } from '@/components/ui/skeleton'
-import { BreadcrumbStructuredData } from '@/components/seo/structured-data'
+import { Header } from '../../components/header'
+import { Footer } from '../../components/footer'
+import { ProductsClient } from '../../components/products-client'
+import { Skeleton } from '../../components/ui/skeleton'
+import { BreadcrumbStructuredData } from '../../components/seo/structured-data'
 
 // Environment-aware base URL helper
 const getBaseUrl = () => {

@@ -1,10 +1,10 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
+import { Button } from '../ui/button'
+import { Badge } from '../ui/badge'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
 import { 
   Globe,
   Plus,
@@ -23,10 +23,10 @@ import {
   ShoppingCart,
   Users
 } from 'lucide-react'
-import PlatformCard from '@/components/admin/platform-card'
-import SyncStatusPanel from '@/components/admin/sync-status-panel'
-import ActivityFeed from '@/components/admin/activity-feed'
-import IntegrationSetup from '@/components/admin/integration-setup'
+import PlatformCard from './platform-card'
+import SyncStatusPanel from './sync-status-panel'
+import ActivityFeed from './activity-feed'
+import IntegrationSetup from './integration-setup'
 
 // V9.11.5: Revolutionary External Platform Integrations Dashboard
 export default function IntegrationsDashboard() {

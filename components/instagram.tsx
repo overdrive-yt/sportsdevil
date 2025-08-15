@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Script from "next/script"
-import { Button } from "@/components/ui/button"
+import { Button } from "./ui/button"
 import { Instagram, ExternalLink } from "lucide-react"
 
 export function InstagramSection() {

@@ -1,6 +1,6 @@
 import { useQuery, useInfiniteQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
-import { apiClient } from '@/lib/api-client'
+import { apiClient } from '../lib/api-client'
 
 interface ProductFilters {
   search?: string

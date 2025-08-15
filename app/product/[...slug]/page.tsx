@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react'
 import { useParams, useSearchParams, notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Skeleton } from '@/components/ui/skeleton'
+import { Button } from '../../../components/ui/button'
+import { Badge } from '../../../components/ui/badge'
+import { Skeleton } from '../../../components/ui/skeleton'
 import { ChevronRight, Filter, Grid, List, SortAsc, Star } from 'lucide-react'
 
 interface Product {

@@ -1,9 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import { Card, CardContent } from '@/components/ui/card'
-import { Skeleton } from '@/components/ui/skeleton'
-import { useCategories } from '@/hooks/use-categories'
+import { Card, CardContent } from './ui/card'
+import { Skeleton } from './ui/skeleton'
+import { useCategories } from '../hooks/use-categories'
 
 export function CategoriesSection() {
   const { data: categoriesData, isLoading, error } = useCategories(false, false)

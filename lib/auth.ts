@@ -3,7 +3,7 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
 import FacebookProvider from 'next-auth/providers/facebook'
 import AppleProvider from 'next-auth/providers/apple'
-import { prisma } from '@/lib/prisma'
+import { prisma } from './prisma'
 import bcrypt from 'bcryptjs'
 
 // Ultra-fast performance cache for session data (extended duration + optimized cleanup)

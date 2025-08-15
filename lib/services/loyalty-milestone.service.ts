@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/prisma'
+import { prisma } from '../prisma'
 import { User, MilestoneReward, Coupon } from '@prisma/client'
 
 interface MilestoneConfig {

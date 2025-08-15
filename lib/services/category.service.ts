@@ -1,5 +1,5 @@
-import { prisma } from '@/lib/prisma'
-import { NotFoundError, ConflictError } from '@/lib/api/errors'
+import { prisma } from '../prisma'
+import { NotFoundError, ConflictError } from '../api/errors'
 
 export interface CategoryCreateData {
   name: string

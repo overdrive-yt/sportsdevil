@@ -3,7 +3,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { useCurrentUser } from '@/hooks/use-auth-store'
+import { useCurrentUser } from '../../hooks/use-auth-store'
 import { 
   Settings,
   Shield,
@@ -35,37 +35,37 @@ import {
   Trash2,
   Plus
 } from 'lucide-react'
-import { EnhancedCard } from '@/components/ui/enhanced-card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
-import { Switch } from '@/components/ui/switch'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-// import { RoleManagement } from '@/components/admin/role-management' // TEMPORARILY DISABLED FOR MIGRATION
+import { EnhancedCard } from '../ui/enhanced-card'
+import { Badge } from '../ui/badge'
+import { Button } from '../ui/button'
+import { Input } from '../ui/input'
+import { Label } from '../ui/label'
+import { Textarea } from '../ui/textarea'
+import { Switch } from '../ui/switch'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
+// import { RoleManagement } from './role-management' // TEMPORARILY DISABLED FOR MIGRATION
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { Separator } from '@/components/ui/separator'
-import { Progress } from '@/components/ui/progress'
+} from '../ui/select'
+import { Separator } from '../ui/separator'
+import { Progress } from '../ui/progress'
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog'
+} from '../ui/dialog'
 import {
   Alert,
   AlertDescription,
   AlertTitle,
-} from '@/components/ui/alert'
-import { Slider } from '@/components/ui/slider'
+} from '../ui/alert'
+import { Slider } from '../ui/slider'
 
 interface SystemSettings {
   general: {

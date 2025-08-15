@@ -1,7 +1,7 @@
-import { prisma } from '@/lib/prisma'
-import { NotFoundError, ConflictError, ValidationError } from '@/lib/api/errors'
-import { buildProductFilters, buildSortOptions } from '@/lib/utils/search'
-import { validatePagination } from '@/lib/utils/pagination'
+import { prisma } from '../prisma'
+import { NotFoundError, ConflictError, ValidationError } from '../api/errors'
+import { buildProductFilters, buildSortOptions } from '../utils/search'
+import { validatePagination } from '../utils/pagination'
 
 export interface ProductFilters {
   search?: string

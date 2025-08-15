@@ -1,8 +1,8 @@
-import { prisma } from '@/lib/prisma'
-import { NotFoundError, ValidationError } from '@/lib/api/errors'
+import { prisma } from '../prisma'
+import { NotFoundError, ValidationError } from '../api/errors'
 import { CartService } from './cart.service'
 import { ProductService } from './product.service'
-import { EmailService } from '@/lib/email'
+import { EmailService } from '../email'
 import Stripe from 'stripe'
 
 // New payment-flow order data structure

@@ -1,5 +1,5 @@
 import * as Sentry from "@sentry/nextjs"
-import { getCurrentUser } from "@/lib/rbac"
+import { getCurrentUser } from "./lib/rbac"
 
 Sentry.init({
   dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,

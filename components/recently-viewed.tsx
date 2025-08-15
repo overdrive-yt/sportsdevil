@@ -3,12 +3,12 @@
 import { useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
+import { Button } from './ui/button'
+import { Badge } from './ui/badge'
 import { X, ShoppingBag } from 'lucide-react'
-import { useRecentlyViewedStore } from '@/stores/recently-viewed-store'
-import { formatPriceSimple } from '@/lib/utils'
+import { useRecentlyViewedStore } from '../stores/recently-viewed-store'
+import { formatPriceSimple } from '../lib/utils'
 
 interface RecentlyViewedProps {
   currentProductId?: string

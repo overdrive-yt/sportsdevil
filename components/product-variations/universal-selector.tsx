@@ -1,21 +1,21 @@
 "use client"
 
 import { useState, useEffect } from 'react'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Label } from '@/components/ui/label'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { Checkbox } from '@/components/ui/checkbox'
+import { Button } from '../ui/button'
+import { Badge } from '../ui/badge'
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
+import { Label } from '../ui/label'
+import { RadioGroup, RadioGroupItem } from '../ui/radio-group'
+import { Checkbox } from '../ui/checkbox'
 import { 
   Select, 
   SelectContent, 
   SelectItem, 
   SelectTrigger, 
   SelectValue 
-} from '@/components/ui/select'
-import { Input } from '@/components/ui/input'
-import { Slider } from '@/components/ui/slider'
+} from '../ui/select'
+import { Input } from '../ui/input'
+import { Slider } from '../ui/slider'
 import { AlertCircle, CheckCircle2, Info } from 'lucide-react'
 import {
   ProductVariationTemplate,
@@ -27,7 +27,7 @@ import {
   generateVariationSKU,
   getVariationDescription,
   getAvailableOptionsForField
-} from '@/lib/variations/universal-variations'
+} from '../../lib/variations/universal-variations'
 
 interface UniversalVariationSelectorProps {
   template: ProductVariationTemplate

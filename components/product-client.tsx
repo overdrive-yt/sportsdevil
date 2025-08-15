@@ -2,14 +2,14 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Card, CardContent } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { useAddToCart } from '@/hooks/use-cart'
-import { useRecentlyViewedStore } from '@/stores/recently-viewed-store'
-import { analytics } from '@/lib/analytics'
+import { Button } from './ui/button'
+import { Badge } from './ui/badge'
+import { Card, CardContent } from './ui/card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
+import { useAddToCart } from '../hooks/use-cart'
+import { useRecentlyViewedStore } from '../stores/recently-viewed-store'
+import { analytics } from '../lib/analytics'
 import { 
   ShoppingCart, 
   Heart, 
@@ -25,12 +25,12 @@ import {
   Dialog,
   DialogContent,
   DialogTrigger,
-} from '@/components/ui/dialog'
-import { RecentlyViewed } from '@/components/recently-viewed'
-import { ReviewList } from '@/components/review-list'
-import { ReviewForm } from '@/components/review-form'
-import { RelatedProducts } from '@/components/related-products'
-import { ProductImage } from '@/components/product-image'
+} from './ui/dialog'
+import { RecentlyViewed } from './recently-viewed'
+import { ReviewList } from './review-list'
+import { ReviewForm } from './review-form'
+import { RelatedProducts } from './related-products'
+import { ProductImage } from './product-image'
 
 interface ProductClientProps {
   product: any

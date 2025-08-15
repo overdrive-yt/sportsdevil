@@ -16,12 +16,12 @@ import {
   Circle,
   Dumbbell
 } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { cn } from '../../lib/utils'
 import { 
   BreadcrumbGenerator,
   type BreadcrumbItem,
   type BreadcrumbConfig
-} from '@/lib/navigation/breadcrumbs'
+} from '../../lib/navigation/breadcrumbs'
 
 interface BreadcrumbNavProps {
   items?: BreadcrumbItem[]

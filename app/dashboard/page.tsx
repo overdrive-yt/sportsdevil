@@ -3,14 +3,14 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Badge } from '@/components/ui/badge'
-import { Separator } from '@/components/ui/separator'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Header } from '@/components/header'
-import { Footer } from '@/components/footer'
+import { Button } from '../../components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs'
+import { Badge } from '../../components/ui/badge'
+import { Separator } from '../../components/ui/separator'
+import { Avatar, AvatarFallback, AvatarImage } from '../../components/ui/avatar'
+import { Header } from '../../components/header'
+import { Footer } from '../../components/footer'
 import { 
   User, 
   Package, 
@@ -31,12 +31,12 @@ import {
   ShoppingBag,
   Loader2
 } from 'lucide-react'
-import { formatPriceSimple } from '@/lib/utils'
-import { useCurrentUser } from '@/hooks/use-auth-store'
-import { useLoyaltyBalance } from '@/hooks/use-loyalty-points'
-import { useDashboardData } from '@/hooks/use-extended-user'
-import { LoyaltyPointsManager } from '@/components/loyalty-points-manager'
-import { ProfileEditor } from '@/components/profile-editor'
+import { formatPriceSimple } from '../../lib/utils'
+import { useCurrentUser } from '../../hooks/use-auth-store'
+import { useLoyaltyBalance } from '../../hooks/use-loyalty-points'
+import { useDashboardData } from '../../hooks/use-extended-user'
+import { LoyaltyPointsManager } from '../../components/loyalty-points-manager'
+import { ProfileEditor } from '../../components/profile-editor'
 
 // Mock wishlist data (will be replaced with real data in future version)
 const mockWishlist = [

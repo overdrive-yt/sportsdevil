@@ -1,14 +1,14 @@
 import { redirect } from 'next/navigation'
 import { getServerSession } from 'next-auth/next'
-import { authOptions } from '@/lib/auth'
-import { prisma } from '@/lib/prisma'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Input } from '@/components/ui/input'
-import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { authOptions } from '../../../lib/auth'
+import { prisma } from '../../../lib/prisma'
+import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card'
+import { Button } from '../../../components/ui/button'
+import { Badge } from '../../../components/ui/badge'
+import { Input } from '../../../components/ui/input'
+import { Alert, AlertDescription } from '../../../components/ui/alert'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../../components/ui/select'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../components/ui/tabs'
 import { 
   ArrowLeft,
   Package,
@@ -35,7 +35,7 @@ import {
   PieChart
 } from 'lucide-react'
 import Link from 'next/link'
-import { formatPriceSimple } from '@/lib/utils'
+import { formatPriceSimple } from '../../../lib/utils'
 
 // Database functions for inventory management
 async function getInventoryData() {

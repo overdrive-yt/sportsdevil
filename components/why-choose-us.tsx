@@ -1,6 +1,6 @@
 'use client'
 
-import { Card, CardContent } from '@/components/ui/card'
+import { Card, CardContent } from './ui/card'
 import { Award, Truck, MessageSquare, Headphones } from 'lucide-react'
 
 const features = [

@@ -4,8 +4,8 @@
  */
 
 import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
-import { prisma } from '@/lib/prisma'
+import { authOptions } from './auth'
+import { prisma } from './prisma'
 import { NextRequest } from 'next/server'
 import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
