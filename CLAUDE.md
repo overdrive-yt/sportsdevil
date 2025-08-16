@@ -193,10 +193,26 @@ Key environment variables required:
 
 ## Optimized Deployment Process
 
-### Quick Deployment (Recommended)
+### Quick Deployment Options (Choose Best for Situation)
+
+**Option 1: Docker Push (Fastest for code changes)**
 ```bash
-# One-command deployment using the optimized script
-./deploy-to-gcp.sh
+# Build and push image layers only (much faster)
+docker build -t gcr.io/sportsdevil/sportsdevil-app:latest .
+docker push gcr.io/sportsdevil/sportsdevil-app:latest
+gcloud run deploy sports-devil --image gcr.io/sportsdevil/sportsdevil-app:latest --region europe-west2
+```
+
+**Option 2: Source Deploy (Good with .gcloudignore)**
+```bash
+# Uses .gcloudignore to skip large files
+gcloud run deploy sports-devil --source . --region europe-west2
+```
+
+**Option 3: Environment-only Updates (Fastest)**
+```bash
+# For config changes only
+gcloud run services update sports-devil --region=europe-west2 --update-env-vars="KEY=value"
 ```
 
 ### Manual Deployment Steps
@@ -240,8 +256,19 @@ curl -s https://sportsdevil.co.uk/api/products | head
 - Automatic versioning with git commit hash
 - Health checks enabled for reliability
 
+### Deployment Speed Issues & Solutions
+
+**Problem**: Project is 3.6GB with massive assets causing 10+ minute uploads
+
+**Fast Solutions (by speed):**
+1. **Config changes only** (5s): `gcloud run services update sports-devil --update-env-vars`
+2. **GitHub Actions CI/CD** (2-3min): Push to repo → auto-deploy 
+3. **Better .gcloudignore** (5-8min): Exclude `public/images/products/` and dev files
+4. **Docker buildx** (5-10min): `docker buildx build --platform linux/amd64 --push`
+
 ### Troubleshooting
 - **Build failures**: Check local `npm run build` first
 - **Authentication**: Ensure `gcloud auth login` is configured
 - **Memory issues**: Current allocation is 2Gi (can be increased)
 - **Cold starts**: Min instances set to 0 for cost optimization
+- **Slow uploads**: Use alternatives above instead of `--source .`
