@@ -70,16 +70,16 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="font-semibold">Customer Service</h3>
             <nav className="flex flex-col space-y-2">
-              <Link href="/contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              <Link href="/contact" prefetch={false} className="text-sm text-muted-foreground hover:text-primary transition-colors">
                 Contact Us
               </Link>
-              <Link href="/shipping" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              <Link href="/shipping" prefetch={false} className="text-sm text-muted-foreground hover:text-primary transition-colors">
                 Shipping Info
               </Link>
-              <Link href="/returns" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              <Link href="/returns" prefetch={false} className="text-sm text-muted-foreground hover:text-primary transition-colors">
                 Returns & Exchanges
               </Link>
-              <Link href="/warranty" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              <Link href="/warranty" prefetch={false} className="text-sm text-muted-foreground hover:text-primary transition-colors">
                 Warranty
               </Link>
             </nav>
@@ -149,13 +149,13 @@ export function Footer() {
             © 2025 Sports Devil™. All rights reserved.
           </p>
           <nav className="flex space-x-6">
-            <Link href="/privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+            <Link href="/privacy" prefetch={false} className="text-sm text-muted-foreground hover:text-primary transition-colors">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+            <Link href="/terms" prefetch={false} className="text-sm text-muted-foreground hover:text-primary transition-colors">
               Terms of Service
             </Link>
-            <Link href="/cookies" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+            <Link href="/cookies" prefetch={false} className="text-sm text-muted-foreground hover:text-primary transition-colors">
               Cookie Policy
             </Link>
           </nav>

@@ -2,16 +2,14 @@
 const CACHE_NAME = 'sports-devil-v9.12-performance'
 const STATIC_CACHE_NAME = 'sports-devil-static-v9.12'
 
-// Critical resources to cache immediately
+// Critical resources to cache immediately (only files that actually exist)
 const CRITICAL_ASSETS = [
   '/',
   '/favicon.ico',
   '/images/site_hero.jpeg',
-  '/images/cricket-equipment.jpg',
-  '/images/logo-dark.png',
-  '/images/logo-light.png',
-  '/_next/static/css/',  // CSS files
-  '/_next/static/js/',   // JavaScript bundles
+  '/images/logo-rect-black.jpg',
+  '/images/logo-rect-white.jpg',
+  '/images/sports-devil-og-image.jpg',
 ]
 
 // API endpoints to cache
@@ -41,10 +39,9 @@ self.addEventListener('install', (event) => {
       // Cache critical static assets
       caches.open(STATIC_CACHE_NAME).then(async (cache) => {
         console.log('📦 Caching critical static assets')
-        const filteredAssets = CRITICAL_ASSETS.filter(url => !url.includes('/_next/'))
         
         // Add assets one by one to handle failures gracefully
-        for (const asset of filteredAssets) {
+        for (const asset of CRITICAL_ASSETS) {
           try {
             const response = await fetch(asset)
             if (response.ok) {

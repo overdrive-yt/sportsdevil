@@ -1,8 +1,11 @@
 import * as Sentry from "@sentry/nextjs"
 import { getCurrentUser } from "./lib/rbac"
 
-Sentry.init({
-  dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
+// Only initialize Sentry if DSN is properly configured
+const sentryDsn = process.env.NEXT_PUBLIC_SENTRY_DSN
+if (sentryDsn && sentryDsn !== '[UPDATE_WITH_PRODUCTION_SENTRY_DSN]' && !sentryDsn.includes('UPDATE_WITH')) {
+  Sentry.init({
+    dsn: sentryDsn,
   environment: process.env.NODE_ENV || "development",
   
   // Performance monitoring (lower sample rate for production)
@@ -62,7 +65,8 @@ Sentry.init({
       platform: "nodejs",
     },
   },
-})
+  })
+}
 
 // Enhanced error reporting with user context
 export async function captureErrorWithContext(error: Error, context?: Record<string, any>, request?: Request) {
