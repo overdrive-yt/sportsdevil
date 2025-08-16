@@ -1,150 +1,126 @@
 #!/bin/bash
 
-# Google Cloud Run Deployment Script for Sports Devil
-# This script automates the entire deployment process
+# Sports Devil - Optimized Google Cloud Run Deployment Script
+# This script handles the complete deployment process in one go
 
-set -e
+set -e  # Exit on any error
+
+echo "🚀 Starting Sports Devil deployment to Google Cloud Run..."
 
 # Configuration
 PROJECT_ID="sportsdevil"
-REGION="europe-west2"
 SERVICE_NAME="sports-devil"
-IMAGE_NAME="sports-devil"
-REPOSITORY_NAME="sports-devil-repo"
+REGION="europe-west2"
+DOCKERFILE_PATH="."
+
+# Environment Variables for Production
+ENV_VARS="DATABASE_URL=postgresql://postgres:thisisasupersafepassword@db.fcntkadkakuxpequjxvz.supabase.co:5432/postgres,NEXTAUTH_URL=https://sportsdevil.co.uk,NEXTAUTH_SECRET=eKaP/XiMiM8XAK8edYfoDO/0K2y6SJlTTHGdJHzXNYM=,STRIPE_SECRET_KEY=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,NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_51K9eY9Il9c9ZTqpAgT1szOqOO7nWMpn1VF6twfcdMQbOu0fCCpdSQhaoy25cRXXXmmkRZE5auGsMnTfxhWKDjuZ800RZry0NXw,STRIPE_WEBHOOK_SECRET=whsec_fVimApiKqlrZufKf6qCGdRLblrqDizJs,GOOGLE_PLACES_API_KEY=AIzaSyCyrxI6SHF4Looaha4U6fuvG5MTFp650Bw,GOOGLE_PLACE_ID=ChIJT1OoLtbNqoQRfYOj6P5ga18,NEXT_PUBLIC_ELFSIGHT_WIDGET_ID=8d5ee4c6-7b98-46c5-ad41-29ed220b02d7,SMTP_HOST=smtp.gmail.com,SMTP_PORT=587,SMTP_USER=pateljsk78@gmail.com,SMTP_PASS=neba myaz odvf ixhu,SPONSORSHIP_EMAIL=info@sportsdevil.co.uk,NODE_OPTIONS=--max-old-space-size=4096,NEXT_TELEMETRY_DISABLED=1"
 
 # Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-echo -e "${GREEN}🚀 Starting Google Cloud Run Deployment${NC}"
-echo "================================================"
+# Function to print colored output
+print_status() {
+    echo -e "${BLUE}[INFO]${NC} $1"
+}
 
-# Step 1: Check billing status
-echo -e "\n${YELLOW}Step 1: Checking billing status...${NC}"
-BILLING_ENABLED=$(gcloud billing projects describe $PROJECT_ID --format="value(billingEnabled)")
+print_success() {
+    echo -e "${GREEN}[SUCCESS]${NC} $1"
+}
 
-if [ "$BILLING_ENABLED" != "True" ]; then
-    echo -e "${RED}❌ Billing is not enabled for project $PROJECT_ID${NC}"
-    echo -e "${YELLOW}Please enable billing at: https://console.cloud.google.com/billing/linkedaccount?project=$PROJECT_ID${NC}"
-    echo "After enabling billing, run this script again."
+print_warning() {
+    echo -e "${YELLOW}[WARNING]${NC} $1"
+}
+
+print_error() {
+    echo -e "${RED}[ERROR]${NC} $1"
+}
+
+# Pre-deployment checks
+print_status "Running pre-deployment checks..."
+
+# Check if gcloud is installed and authenticated
+if ! command -v gcloud &> /dev/null; then
+    print_error "gcloud CLI is not installed"
     exit 1
 fi
-echo -e "${GREEN}✅ Billing is enabled${NC}"
 
-# Step 2: Enable required APIs
-echo -e "\n${YELLOW}Step 2: Enabling required APIs...${NC}"
-gcloud services enable run.googleapis.com \
-    cloudbuild.googleapis.com \
-    artifactregistry.googleapis.com \
-    storage.googleapis.com \
-    --project=$PROJECT_ID
+# Check if authenticated
+if ! gcloud auth list --filter=status:ACTIVE --format="value(account)" | grep -q .; then
+    print_error "Not authenticated with gcloud. Run: gcloud auth login"
+    exit 1
+fi
 
-echo -e "${GREEN}✅ APIs enabled${NC}"
+# Check if correct project is set
+CURRENT_PROJECT=$(gcloud config get-value project)
+if [ "$CURRENT_PROJECT" != "$PROJECT_ID" ]; then
+    print_warning "Current project is $CURRENT_PROJECT, switching to $PROJECT_ID"
+    gcloud config set project $PROJECT_ID
+fi
 
-# Step 3: Create Artifact Registry repository
-echo -e "\n${YELLOW}Step 3: Creating Artifact Registry repository...${NC}"
-gcloud artifacts repositories create $REPOSITORY_NAME \
-    --repository-format=docker \
-    --location=$REGION \
-    --description="Docker repository for Sports Devil" \
-    --project=$PROJECT_ID || echo "Repository already exists"
+# Check if there are uncommitted changes
+if ! git diff-index --quiet HEAD --; then
+    print_warning "You have uncommitted changes. Consider committing them first."
+    read -p "Continue anyway? (y/n): " -n 1 -r
+    echo
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        exit 1
+    fi
+fi
 
-# Configure Docker authentication
-gcloud auth configure-docker ${REGION}-docker.pkg.dev
+# Optional: Run build locally first to catch errors early
+print_status "Running local build test..."
+if ! npm run build > /dev/null 2>&1; then
+    print_error "Local build failed. Fix errors before deploying."
+    exit 1
+fi
+print_success "Local build successful"
 
-echo -e "${GREEN}✅ Artifact Registry configured${NC}"
+# Get current version for deployment tracking
+CURRENT_COMMIT=$(git rev-parse --short HEAD)
+APP_VERSION="v$(date +%Y%m%d)-${CURRENT_COMMIT}"
+FULL_ENV_VARS="${ENV_VARS},NEXT_PUBLIC_APP_VERSION=${APP_VERSION}"
 
-# Step 4: Build Docker image
-echo -e "\n${YELLOW}Step 4: Building Docker image...${NC}"
-echo "This may take 5-10 minutes..."
+print_status "Deploying version: $APP_VERSION"
 
-# Build the image
-docker build -t ${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY_NAME}/${IMAGE_NAME}:latest .
+# Deploy to Cloud Run
+print_status "Deploying to Cloud Run..."
+print_status "Service: $SERVICE_NAME | Region: $REGION | Project: $PROJECT_ID"
 
-echo -e "${GREEN}✅ Docker image built${NC}"
-
-# Step 5: Push image to Artifact Registry
-echo -e "\n${YELLOW}Step 5: Pushing image to Artifact Registry...${NC}"
-docker push ${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY_NAME}/${IMAGE_NAME}:latest
-
-echo -e "${GREEN}✅ Image pushed to registry${NC}"
-
-# Step 6: Generate secure NEXTAUTH_SECRET
-echo -e "\n${YELLOW}Step 6: Generating secure NEXTAUTH_SECRET...${NC}"
-NEXTAUTH_SECRET=$(openssl rand -base64 32)
-echo -e "${GREEN}✅ NEXTAUTH_SECRET generated${NC}"
-
-# Step 7: Deploy to Cloud Run
-echo -e "\n${YELLOW}Step 7: Deploying to Cloud Run...${NC}"
-
-# Get the Cloud Run service URL (will be set after deployment)
-SERVICE_URL=""
-
-# Deploy the service with environment variables
 gcloud run deploy $SERVICE_NAME \
-    --image=${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY_NAME}/${IMAGE_NAME}:latest \
-    --region=$REGION \
-    --platform=managed \
-    --allow-unauthenticated \
-    --port=3000 \
-    --memory=1Gi \
-    --cpu=1 \
-    --min-instances=0 \
-    --max-instances=10 \
-    --concurrency=100 \
-    --set-env-vars="NODE_ENV=production" \
-    --set-env-vars="DATABASE_URL=postgresql://postgres.fcntkadkakuxpequjxvz:YBE5NxXxL7wHCJH0@aws-0-eu-west-2.pooler.supabase.com:6543/postgres?pgbouncer=true&connection_limit=1" \
-    --set-env-vars="DIRECT_URL=postgresql://postgres.fcntkadkakuxpequjxvz:YBE5NxXxL7wHCJH0@aws-0-eu-west-2.pooler.supabase.com:5432/postgres" \
-    --set-env-vars="NEXT_PUBLIC_SUPABASE_URL=https://fcntkadkakuxpequjxvz.supabase.co" \
-    --set-env-vars="NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZjbnRrYWRrYWt1eHBlcXVqeHZ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUwMDk1OTYsImV4cCI6MjA3MDU4NTU5Nn0.eA4Qo40hBO9C0P2kxb_fn_0lenf_1gl0rKSHCKQpzRA" \
-    --set-env-vars="NEXTAUTH_SECRET=$NEXTAUTH_SECRET" \
-    --set-env-vars="STRIPE_SECRET_KEY=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" \
-    --set-env-vars="NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_51K9eY9Il9c9ZTqpAgT1szOqOO7nWMpn1VF6twfcdMQbOu0fCCpdSQhaoy25cRXXXmmkRZE5auGsMnTfxhWKDjuZ800RZry0NXw" \
-    --set-env-vars="STRIPE_WEBHOOK_SECRET=whsec_fVimApiKqlrZufKf6qCGdRLblrqDizJs" \
-    --set-env-vars="GOOGLE_PLACES_API_KEY=AIzaSyCyrxI6SHF4Looaha4U6fuvG5MTFp650Bw" \
-    --set-env-vars="GOOGLE_PLACE_ID=ChIJT1OoLtbNqoQRfYOj6P5ga18" \
-    --set-env-vars="NEXT_PUBLIC_ELFSIGHT_WIDGET_ID=8d5ee4c6-7b98-46c5-ad41-29ed220b02d7" \
-    --set-env-vars="SMTP_HOST=smtp.gmail.com" \
-    --set-env-vars="SMTP_PORT=587" \
-    --set-env-vars="SMTP_USER=pateljsk78@gmail.com" \
-    --set-env-vars="SMTP_PASS=neba myaz odvf ixhu" \
-    --set-env-vars="SPONSORSHIP_EMAIL=info@sportsdevil.co.uk" \
-    --set-env-vars="NEXT_TELEMETRY_DISABLED=1" \
-    --project=$PROJECT_ID
+  --source $DOCKERFILE_PATH \
+  --region $REGION \
+  --platform managed \
+  --allow-unauthenticated \
+  --set-env-vars="$FULL_ENV_VARS" \
+  --timeout=900s \
+  --memory=2Gi \
+  --cpu=2 \
+  --max-instances=10 \
+  --min-instances=0
 
-echo -e "${GREEN}✅ Service deployed${NC}"
-
-# Step 8: Get service URL
-echo -e "\n${YELLOW}Step 8: Getting service URL...${NC}"
-SERVICE_URL=$(gcloud run services describe $SERVICE_NAME --region=$REGION --format="value(status.url)" --project=$PROJECT_ID)
-
-# Update NEXTAUTH_URL with the actual service URL
-echo -e "\n${YELLOW}Updating NEXTAUTH_URL...${NC}"
-gcloud run services update $SERVICE_NAME \
-    --region=$REGION \
-    --update-env-vars="NEXTAUTH_URL=$SERVICE_URL,NEXT_PUBLIC_APP_URL=$SERVICE_URL" \
-    --project=$PROJECT_ID
-
-echo -e "${GREEN}✅ Environment variables updated${NC}"
-
-# Step 9: Display deployment information
-echo -e "\n${GREEN}================================================${NC}"
-echo -e "${GREEN}🎉 Deployment Complete!${NC}"
-echo -e "${GREEN}================================================${NC}"
-echo -e "\n${YELLOW}Service Information:${NC}"
-echo -e "Service URL: ${GREEN}$SERVICE_URL${NC}"
-echo -e "Service Name: $SERVICE_NAME"
-echo -e "Region: $REGION"
-echo -e "Project: $PROJECT_ID"
-echo -e "\n${YELLOW}Important Notes:${NC}"
-echo -e "1. Your application is now live at: ${GREEN}$SERVICE_URL${NC}"
-echo -e "2. NEXTAUTH_SECRET has been generated and set"
-echo -e "3. The service will scale from 0 to 10 instances based on traffic"
-echo -e "4. To set up a custom domain, run:"
-echo -e "   ${YELLOW}gcloud run domain-mappings create --service=$SERVICE_NAME --domain=sportsdevil.co.uk --region=$REGION${NC}"
-echo -e "\n${YELLOW}Monitoring:${NC}"
-echo -e "View logs: ${YELLOW}gcloud logging read \"resource.type=cloud_run_revision AND resource.labels.service_name=$SERVICE_NAME\" --limit=50${NC}"
-echo -e "View metrics: ${YELLOW}https://console.cloud.google.com/run/detail/$REGION/$SERVICE_NAME/metrics?project=$PROJECT_ID${NC}"
-echo -e "\n${GREEN}Happy selling! 🏏${NC}"
+if [ $? -eq 0 ]; then
+    print_success "Deployment completed successfully!"
+    
+    # Get the service URL
+    SERVICE_URL=$(gcloud run services describe $SERVICE_NAME --region=$REGION --format="value(status.url)")
+    print_success "Service URL: $SERVICE_URL"
+    
+    # Test if the service is responding
+    print_status "Testing deployment..."
+    if curl -s -f $SERVICE_URL > /dev/null; then
+        print_success "Service is responding correctly!"
+    else
+        print_warning "Service deployed but may not be responding correctly"
+    fi
+    
+    print_success "🎉 Deployment complete! Your site is live at https://sportsdevil.co.uk"
+    
+else
+    print_error "Deployment failed!"
+    exit 1
+fi

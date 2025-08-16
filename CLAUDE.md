@@ -182,8 +182,66 @@ Key environment variables required:
 
 ### Deployment Notes
 
-- Deployed on Vercel with London region (lhr1)
-- Build command: `npm run build`
-- API routes have 30-second max duration
-- Automatic source map upload to Sentry in production
-- Headers and redirects configured in `vercel.json`
+**Current Deployment: Google Cloud Run**
+- Service Name: `sports-devil`
+- Region: `europe-west2` (London)
+- Project: `sportsdevil`
+- Domain: `sportsdevil.co.uk`
+- Build: Dockerfile-based deployment
+- Memory: 2Gi, CPU: 2 cores
+- Auto-scaling: 0-10 instances
+
+## Optimized Deployment Process
+
+### Quick Deployment (Recommended)
+```bash
+# One-command deployment using the optimized script
+./deploy-to-gcp.sh
+```
+
+### Manual Deployment Steps
+```bash
+# 1. Commit and push changes
+git add .
+git commit -m "Your changes"
+git push origin main
+
+# 2. Deploy to Google Cloud Run
+gcloud run deploy sports-devil \
+  --source . \
+  --region europe-west2 \
+  --platform managed \
+  --allow-unauthenticated \
+  --set-env-vars="[ENV_VARS_FROM_SCRIPT]"
+
+# 3. Test deployment
+curl -s https://sportsdevil.co.uk/api/health
+```
+
+### Post-Deployment Tasks
+```bash
+# Populate product images (if needed)
+curl -X POST https://sportsdevil.co.uk/api/populate-images
+
+# Test key functionality
+curl -s https://sportsdevil.co.uk/api/products | head
+```
+
+### Deployment Best Practices
+1. **Always test locally first**: `npm run build`
+2. **Use the deployment script**: `./deploy-to-gcp.sh`
+3. **Monitor deployment**: Check Cloud Run console for logs
+4. **Verify functionality**: Test critical API endpoints
+5. **Cache warming**: Service worker will auto-warm critical resources
+
+### Environment Configuration
+- All environment variables stored in `deploy-to-gcp.sh`
+- Production secrets managed via Google Cloud Run environment variables
+- Automatic versioning with git commit hash
+- Health checks enabled for reliability
+
+### Troubleshooting
+- **Build failures**: Check local `npm run build` first
+- **Authentication**: Ensure `gcloud auth login` is configured
+- **Memory issues**: Current allocation is 2Gi (can be increased)
+- **Cold starts**: Min instances set to 0 for cost optimization

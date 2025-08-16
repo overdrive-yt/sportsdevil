@@ -336,7 +336,7 @@ const nextConfig = {
           "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
           "img-src 'self' data: blob: https: http:",
           "font-src 'self' https://fonts.gstatic.com",
-          "connect-src 'self' https://api.stripe.com https://maps.googleapis.com https://sportsdevil.co.uk https://core.elfsightcdn.com https://widgets.elfsight.com wss:",
+          "connect-src 'self' https://api.stripe.com https://maps.googleapis.com https://sportsdevil.co.uk https://core.elfsightcdn.com https://core.service.elfsight.com https://widgets.elfsight.com wss:",
           "frame-src https://js.stripe.com https://hooks.stripe.com",
           "object-src 'none'",
           "base-uri 'self'",
